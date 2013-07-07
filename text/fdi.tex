@@ -1,0 +1,247 @@
+
+The feedback-directed inlining (\FDI) ~\cite{BerubePhD} evaluated in this work is
+fundamentally different than the existing static inliner in \llvm.
+The static inliner inlines small calls to remove call overhead with
+minimal increases in code size.  \FDI\ attempts to minimize the
+dynamic number of instructions executed by the program by inlining the
+most frequent calls.  While the static inliner considers call sites on
+a function-by-function basis, \FDI\ considers the set of inlining
+opportunities present at global scope in the current state of the
+program.
+
+% Remove the ``then'' keyword from if statements
+\SetKwIF{If}{ElseIf}{Else}{if}{}{else if}{else}{endif}
+\begin{algorithm}[t!p]
+\begin{small}
+  \input{Algorithms/fdi}
+\end{small}
+  \caption{\FDI\ worklist}
+  \label{alg:fdiworklist}
+\end{algorithm}
+
+What \FDI\ does is to set the problem as one of constrained minimization,
+the {\it Substitution Problem} \cite{Arnold00}. So, for a particular program, a subset of
+all invocations, the values of maximum program size, maximum callee size,
+etc, find a sequence of substitutions that can minimize the expected
+program execution time. And this is done by following the order of the
+candidate call sites in the candidates list. The list is ordered by the
+score of each candidate.
+
+The assumption is that this is an efficient reduction of the Knapsack
+Problem to the Substitution Problem \cite{Arnold00,Scheifler1977}. The
+Knapsack Problem is known to be NP-hard \cite{Garey1979}, so it's
+intractable. To perform the reduction, we first assume that it is
+possible to construct an invocation with any integral execution time
+overhead. The second assumption is that it is possible to construct a
+procedure of any integral size less than the maximum.
+
+%\rr{Hidden text extracted from Scheifler1977}
+%We define the maximum procedure size so that all
+%substitutions are possible, but we constrain the maxi-
+%mum program size increase to k. By construction, the
+%execution time saved by any sequence of substitutions
+%will be exactly the same as the resultant size increase,
+%and so the maximum time savings possible is k. If there
+%is a subsequence of S that sums to k, then there is a
+%sequence of substitutions that will obtain the maximum
+%time savings. Conversely, if there is a sequence that
+%obtains the maximum time savings, then there is a
+%subsequence of S that sums to k. Hence we can solve
+%the Knapsack Problem by solving the Substitution
+%Problem. Any tractable solution to the Substitution
+%Problem is thus a tractable solution to the Knapsack
+%Problem, for we can certainly perform the above con-
+%struction in polynomial time.
+%
+%The reduction we have given depends on the fact
+%that the maximum procedure size and maximum pro-
+%gram size can be made arbitrarily large. If there are
+%absolute bounds on these sizes, it may be possible to
+%solve the Substitution Problem in polynomial time.
+%However, as long as the bounds are reasonably large,
+%the polynomial will be of very high degree, and so the
+%problem is still essentially intractable.
+%
+%In view of the above, it is reasonable to take an
+%engineering approach and make certain approxima-
+%tions in a manner that will arrive, we hope, at a near-
+%optimal solution. To begin, we need some measure of
+%size and some measure of the execution time overhead
+%for any given invocation. The size change resulting
+%from a substitution is easy to compute, but we need a
+%method for determining how the overhead of an invo-
+%cation changes as other invocations are expanded. We
+%make several practical approximations to fulfill these
+%needs and then return to the actual problem solution at
+%the end of this section)
+%
+%The algorithm we choose has three distinct phases.
+%At each step in the first phase, every substitution that
+%will result in a nonpositive basic size change is per-
+%formed, independent of the time saved; the process
+%repeats until no further substitutions are possible by
+%this rule. The basic size change for a substitution is the
+%change in the size of the procedure body containing the
+%invocation. The reduction in program size possible if
+%the called procedure can be removed is n o t counted in
+%the basic size change, but it/s counted in determining
+%the program size after the substitution. We use the
+%basic size change in an attempt to keep procedure sizes
+%small. As a heuristic, we would rather substitute a small
+%frequently called procedure often than expand one in-
+%vocation of a very large procedure within that small
+%procedure.
+%
+%The second phase is the heart of the algorithm. At
+%each step, the invocation with the highest ratio of
+%expected executions to basic size change, whose expan-
+%sion will not violate the procedure size constraint, is
+%expanded. Any invocations created by the substitution
+%are available at the next step. The order of substitution
+%can be computed very cheaply by using this rule, but
+%there are no mathematical guarantees that the result
+%will be near-optimal. 4 The hope, of course, is that good
+%results are obtainable for this specific application and
+%that more expensive calculations are not required. Sub-
+%stitutions continue according to this rule until the maxi-
+%mum program size is just exceeded. We prefer not to
+%complicate the rule to avoid violating the size con-
+%straint; the maximum is, after all, only approximate,
+%and in general the additional increase will be small.
+%
+%Once the second phase is complete, it still may be
+%possible to expand some invocations without increasing
+%the total program size. When a nonrecursive procedure
+%has exactly one invocation to it remaining in the entire
+%program and the procedure is known not to be called by
+%any other mechanism, expansion of the invocation also
+%allows the procedure to be removed, and little if any
+%total size increase is involved. All such expansions that
+%do not violate the procedure size constraint are per-
+%formed in the third and final phase.
+
+\subsection{Worklist Algorithm}
+
+\refAlgorithm{alg:fdiworklist} presents an outline of the worklist
+algorithm used by \FDI.  The algorithm uses several data structures:
+\begin{description}
+
+\item[{\it candidates:}] \hspace{15,5 pt}
+  The worklist is a sorted list of candidates.
+  A call site is an inlining candidate if it is a direct call, and if
+  the callee does not contain a \name{setjump} nor has any previous
+  attempt to inline the callee failed.  Furthermore, the call site
+  must have executed at least once during profiling.
+
+\item[{\it ignored:}] \hspace{5 pt}
+  A list of call sites that are not inlining
+  candidates.  This list is maintained to enable correct and efficient
+  bookkeeping, and to allow any copies of these call sites created by
+  inlining their caller to be immediately ignored.
+
+\item[{\it callers:}] \hspace{2 pt}
+  A mapping from functions to the call sites that
+  call them.  This map allows for the re-scoring of call sites on the
+  event that a call is inlined into their callee.  That inlining will
+  change the callee's size, and may change the expected
+  simplifications possible if the callee is inlined.
+
+\item[{\it inlineResult:}] \hspace{19,5 pt}
+  A structure returned by inliner that
+  provides summary information regarding the transformation.  In
+  particular, it indicates if the attempted inlining failed.
+  \FDI\ enhances the default \llvm\ structure with co-indexed lists
+  identifying the new call sites created in the caller by inlining,
+  and their originating call sites in the callee.  This information is
+  required so that profile information can be estimated for the new
+  call sites.
+
+\end{description}
+
+At the start of \FDI, the \CProf\ is read in, and the histograms are
+associated with the appropriate call sites (\refLine{wl:init}).  Every
+call site is inserted into the callers list of their callee.  During
+initialization, each call site is evaluated, and added to either the
+candidates or ignored list, as appropriate.  When a call site is
+rejected for inlining, it is immediately and permanently moved from
+the list of candidates to the ignore list.  Transformations such as
+constant propagation or alias analysis can resolve the callee of an
+indirect call to a single possibility, thereby making it a direct
+call.  However, if the call is indirect when the call site is first
+discovered by the inliner, it is placed on the ignore list in spite of
+the possibility of future inlining resolving the call.  Calls to
+libraries and compiler built-in functions are also immediately ignored
+because they cannot be inlined.
+
+\subsection{Candidate Scoring}
+\label{inlining:scoring}
+
+The \llvm\ inliner makes inlining decisions at each call site by
+comparing the expected code growth to a fixed threshold.  \FDI\ takes
+a more directly execution-time-oriented approach to inlining and
+attempts to achieve the greatest reduction in executed instructions
+for the least amount of code growth.  Therefore, \FDI\ breaks the
+evaluation of a call site into three components: the expected inlining
+benefit, the expected code growth, and execution frequency of the call
+site.  Given a call site, \CS, the inlining candidate scoring
+function, \ScoreOf{\CS}, combines these three elements so
+that \refAlgorithm{alg:fdiworklist} can select the best (highest
+score) candidates for inlining first. \CP\ provides a rich
+characterization of execution frequency. Making use of that
+information is described in detail in \cite{BerubePhD}; for
+now, let $\RewardOf{\BenefitOf{\CS}, R_{\CS}}$ represent some function
+of the estimated (execution-frequency independent) inlining benefit at
+call site \CS\ and $R_{\CS}$, that call-site's \CP\ monitor.  Given
+the benefit function \BenefitOf{\CS} and a cost function \CostOf{\CS}
+described in this section, an inlining candidate's \Score\ is
+conceptually computed:
+
+$$ \ScoreOf{\CS} = \dfrac{\RewardOf{\BenefitOf{\CS}, R_{\CS}}}{\CostOf{\CS}} $$
+
+More details on Benefit and Cost functions can be found in \cite{BerubePhD}.
+
+\subsection{Finding the Best Candidate}
+\label{inlining:candidate}
+
+The best candidate to inlining is found by its own score. The way it is
+done is simply sorting the candidates list by their score values. So
+every time a new candidate is needed, just take the top one from the
+ordered list of candidates. Line $05$ of \refAlgorithm{alg:fdiworklist}
+shows this choice.
+
+But the ordering depends on scoring, and scoring is sensitive to some
+parameters values. For instance, the expected reduction/expansion for each
+function is directly dependent of its expected size, and the reduction/
+expansion define the benefit and the cost of a function, in other words, its
+own score. The parameters that can have some effect on the scoring function
+are the sizes of a instruction, a call, a return, a branch, an allocation,
+and a block.
+
+Depending on the values of these parameters, the scoring function returns
+different values for each function, and the ordering may be changed, which
+makes the inliner take different decisions. The sensitivity of the scoring
+function have a direct effect on the sorting of the candidates list, which
+also have a strong impact on inline decisions.
+
+To assure good decisions the system must have a good scoring function,
+meaning that its result allows a good ordering for the inliner. But, a good
+ordering depends on how accurate are the estimated scores. One way we can
+calibrate the scores is to run the system on some known benchmarks. This way
+the parameters can be calibrated to their best values, those who produce
+the best estimates.
+
+So there is a need to find a ``sweetspot'' on these values. The first idea was
+to apply machine learning techniques to search for it through a space of
+possible values. But there are also some issues, we cannot afford to have a
+huge number of acquisition points because the whole system takes a long time
+to process. Also, optimizing a function without knowing if it is differentiable,
+or convex, is not a trivial machine learning task.
+
+But the simple choice of a candidate may be done in other ways, for instance
+considering the current budget value, the expenditure of the candidates, etc.
+In sectionref{sec:choice} we propose and measure the performance of two other
+different algorithms for the task of choosing the best candidate for the
+inliner, and compare them with the one used in \refAlgorithm{alg:fdiworklist}.
+The first is a ``more complete'' implementation of the knapsack algorithm,
+and the second represents the null hypotheses, is a random choice. We defined
+our algorithm empirically, based on the data we have collected.

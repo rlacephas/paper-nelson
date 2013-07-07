@@ -1,0 +1,183 @@
+
+We have performed an experiment comparing the performance of the \llvm\ static inliner and the \FDI\ inliner described in ~\cite{BerubePhD}. Both inliners are also evaluated with respect to the baseline Never, which means never inline. Our setting that was tested using the programs \bzip\ and \gzip, was not extracted from the SPEC CPU 2006 benchmark suite, rather than we used the fully-functional ``real'' versions. Using the real versions of the compressor programs eliminates the unrealistically-simplified profiling situation where mutually-exclusive use cases are combined into a single program run. Consequently, these programs cannot do decompression and compression, or multiple levels of compression, within the same run.  These distinct use-cases must be covered by different inputs in the program workload. Our results show a slight improvement over the \llvm\ results. For \gcc\ we used the SPEC CPU 2006 benchmark suite.  SPEC provides 11 inputs for \gcc\ from those we selected 7, {\tt 166, Cp-decl, expr, expr2, g23, integrate, bzipR-all, lbm-all, mcf-all}. And we added 3 inputs converted from the SPEC 2000 benchmark, \bzip, \lbm, and \mcf.
+
+The \bzip\ and \gzip\ programs were executed using a representative set of inputs, where compression tasks and decompression tasks were tested under similar inputs.
+The compression set contains the following inputs, with the compression level shown in parentheses:
+\begin{itemize}
+
+%\item {\tt avernum (-3)}: The installer for the demo version of the game  ``Avernum: Escape from the Pit'' from Spiderweb Software.
+
+\item {\tt cards (-4)}: A collection of greeting card layouts in the TIFF (uncompressed) image format.
+
+%\item {\tt ebooks (-5)}: A collection of ebooks, with and without images, and in a variety of formats, from Project Gutenberg\footnote{http://www.gutenberg.org}.
+
+%\item {\tt potemkin-mp4 (-6)}: The 1925 movie ``Bronenosets Potyomkin (Battleship Potemkin)'' in MP4 format, from the Internet Archive\footnote{http://archive.org/details/BattleshipPotemkin}.
+
+%\item {\tt proteins-1 (-7)}: A sample of 33 proteins from the RCSB Protein Data Bank database.  6 files for each protein, each stored in a different text-based format, provide different characteristics of the protein's structure\footnote{http://www.rcsb.org}.
+
+\item {\tt revelation-ogg (-8)}: The audio book ``The Revelation of Saint John'' in OGG format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/22945}.
+
+%\item {\tt usrlib-so (-9)}: A collection of shared object (.so) files from {\tt /usr/lib/} of a 32-bit gentoo-linux machine.
+
+\end{itemize}
+
+The decompression set for each compressor uses the same base set of files, pre-compressed by the appropriate compressor at the default compression level.  The decompression set is composed of:
+\begin{itemize}
+\item {\tt auriel}: The ``Auriel's Retreat'' land-mass addition mod by lance4791 for the game ``The Elder Scrolls IV: Oblivion'' from Bethesda Softworks\footnote{http://planetelderscrolls.gamespy.com/View.php?view=\\ \hspace*{150 pt}OblivionMods.Detail\&id=5949}.
+
+%\item {\tt gcc-453}: The source-code archive of the \gcc\ compiler, version 4.5.3\footnote{http://gcc.gnu.org/gcc-4.5}.
+
+%\item {\tt lib-a}: A collection of library files (.a) from {\tt /lib/} of a gentoo-linux machine.  As per the gentoo development guide, a library will be installed in {\tt /lib} (boot critical) or {\tt /usr/lib} (general applications), but not both\footnote{http://devmanual.gentoo.org/general-concepts/filesystem/index.html}.
+
+%\item {\tt mohicans-ogv}: The 1920 movie ``Last of the Mohicans'' in OGV (ogg video) format, from the Internet Archive\footnote{http://archive.org/details/last\_of\_the\_mohicans\_1920}.
+
+\item {\tt ocal-019}: The Open Clip Art Library archive, version 0.19. The images are primarily in vector-graphics formats\footnote{http://openclipart.org/collections}.
+
+%\item {\tt paintings-jpg}: A collection of watercolor paintings, in JPG format.
+
+\item {\tt proteins-2}: A completely different sample of 157 proteins from the RCSB Protein Data Bank database, each in 6 different file formats.
+
+%\item {\tt sherlock-mp3}: The audio book ``The Adventures of Sherlock Holmes'' in MP3 format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/28733}.
+
+\end{itemize}
+
+\subsection{Setting up the experiments}
+
+%============ Hardware
+
+We ran our experiments on $20$ Dell Optiplex 755, whose characteristics are:
+\begin{itemize}
+
+\item Intel Duo Core E6750 2.66 GHz processor;
+
+\item 4 GB RAM;
+
+\item DVD-RW drive;
+
+\item Intel Pro/1000 Gb ethernet;
+
+\item Gigabyte GeForce 8600 video cards;
+
+\item 250 GB SATA II drive. 
+
+\end{itemize}
+
+%============ Our results
+
+\subsection{Presenting the results}
+
+We employed a single-run methodology for the experiments and we used three benchmarks to test our hypotheses, \bzip, \gzip, and \gcc. The results are presented in the following way, we grouped the \bzip\ with \gzip, and separate \gcc\ to another section. We decided to present the results for \bzip\ and \gzip\ together because these programs have similar behavior and \gcc\ has a completely different behaviour.
+
+\subsubsection{Compressors / Decompressors}
+
+We will start by describing our experiments with the data collected from the \bzip\ runs are summarized in \refTable{tab:speedupb}. In this table we show that we achieved a slight speedup of $1.36 \%$ over \llvm\ results.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedupb}
+  \end{tiny}
+  \caption{Summary of the data collected during the experiment with \bzip}
+  \label{tab:speedupb}
+\end{table}
+
+\refFigure{fig:speedup} shows the running time normalized by the time of Never (no inlining). We can see that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains our speedup. The experiment on the program \bzip\ shed some light and these results can be fully explored in future research.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupb}
+  \caption{Running times of the \bzip\ inlined versions, normalized by Never}
+  \label{fig:speedup}
+\end{figure}
+
+The final speedup, despite being a slight improvement, represents that the \FDI\ inliner can actually be employed instead of the \llvm\ inliner. And this result is significant because the program \bzip\ is small, simple, and not particularly fitted to inlining, leading to a conjecture that \FDI\ inliner are better than static ones. Which opens a wide range of experiments with other programs to confirm this conjecture. We ran also with \gzip, which happens to be quite similar to \bzip, and confirmed a speedup of $2.09 \%$ over \llvm\ results. These results can be seen in \refTable{tab:speedupz}, where the times are already normalized by the baseline Never (no inlining). \refFigure{fig:speedupz} shows the normalized running time for \gzip, and it also outperforms Never and \llvm through all inputs.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedupz}
+  \end{tiny}
+  \caption{Summary of the data collected during the experiment with \gzip}
+  \label{tab:speedupz}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedup}
+  \caption{Running times of the \gzip\ inlined versions, normalized by Never}
+  \label{fig:speedupz}
+\end{figure}
+
+The results of the experiment are also consistent with other similar findings in the literature, whereas employing single-run experiments does not generate any kind of disturbance in the analysis, and the speedup result are statistically sound. So we can confirm a speedup over the static inliner for the \bzip\ and \gzip\ cases.
+
+\subsubsection{\Gcc\ Benchmark}
+
+For the \gcc\ benchmark we were able to report a more significant result, we measured a $5.88 \%$ speedup over \llvm\ using the set of inputs described above. This result is summarized in \refTable{tab:speedupgcc} below. The results are normalized by the baseline Never.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedup}
+  \end{tiny}
+  \caption{Summary of the data collected during the experiment with \gcc}
+  \label{tab:speedupgcc}
+\end{table}
+
+The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, the same way the former experiments did. But this particular experiment shows a much better result, for the speedup is much higher.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc}
+  \caption{Running times of the \gcc\ inlined versions, normalized by Never}
+  \label{fig:speedupgcc}
+\end{figure}
+
+Nevertheless, we can show how we can improve this result by just choosing less inputs from the original input set. In this case we can report a speedup of $7.76 \%$, as shown in \refTable{tab:speedupgcc1} and \refFigure{fig:speedupgcc1} below.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedup1}
+  \end{tiny}
+  \caption{Extract of the data collected during the experiment with \gcc}
+  \label{tab:speedupgcc1}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc1}
+  \caption{Extract of the running times of the \gcc\ inlined versions, normalized by Never}
+  \label{fig:speedupgcc1}
+\end{figure}
+
+\subsubsection{A slowdown}
+\label{sec:slowdown}
+
+We have to report also that the same experiment was carried out by another group, but unfortunately this group could not confirm our results. The differences in the timing measurements could be considered relevant, and both groups are now trying to understand what went wrong with the latter experiment. They measured a slowdown of $2.14 \%$ for \bzip, and a slowdown of $5.87 \%$ for \gzip, and a slowdown of $2.06 \%$ for \gcc,as shown in \refTable{tab:slowdownb}, \refTable{tab:slowdownz}, and \refTable{tab:slowdowngcc}.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/slowdownb}
+  \end{tiny}
+  \caption{Data reflecting a slowdown on \bzip\ -- collected by other research group}
+  \label{tab:slowdownb}
+\end{table}
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/slowdownz}
+  \end{tiny}
+  \caption{Data reflecting a slowdown on \gzip\ -- collected by other research group}
+  \label{tab:slowdownz}
+\end{table}
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/slowdown}
+  \end{tiny}
+  \caption{Data reflecting a slowdown on \gcc\ -- collected by other research group}
+  \label{tab:slowdowngcc}
+\end{table}

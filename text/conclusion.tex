@@ -1,0 +1,24 @@
+
+As mentioned in \refSection{sec:intro} we proposed a case study was for the inlining transformation, and we compared the \CP\ process with the single-run process. We could have chosen any other transformation, because the \CP\ methodology can be applied in all general cases.
+
+In \refSection{sec:speedup} we showed a erroneous speedup measured by a single-run experiment. It was constructed considering that any of the measurements that we ran independently could have happened in a single-run experiment. Hence we searched the collected data trying to find some outliers, or at least some data extreme points. We gathered these data points and defined two specific cases: \name{Best-runtime} and \name{Worst-runtime} for our \FDO-based inliner, and for a static inliner, in this case the \llvm\ inliner.
+
+With these data points we were able to select the pairs to create the illusion of a speedup and a slowdown:
+\begin{itemize}
+ \item \name{Best-runtime} for \FDO\ and \name{Worst-runtime} for \llvm, creating a speedup;
+ \item \name{Worst-runtime} for \FDO\ and \name{Best-runtime} for \llvm, creating a slowdown.
+\end{itemize}
+
+With these pairs we could produce a statistical analysis showing a speedup (or slowdown), and we devised these pairs as being representative cases of single-run experiments. Therefore, each pair (speedup or slowdown) can be viewed as a result of a single-run experiment. Even if the researcher is extremely cautious the methodology is error-prone, a bias can be introduced without the knowledge, or intention, of the researcher. So the real message is to define and use a reliable methodology based on solid statistical measurements.
+
+With our experiments we were able to answer some of the open questions posed in the \refSection{sec:intro}. We know for sure, and showed it in \refSection{sec:robust}, that \FDI\ decisions can be more accurate using \CP\ instead of single-run evaluation. For the case of the impact of \CP\ in a controlled case study, we can definitely state that as we run each program more than once, that's the price we have to pay for more reliability, but the impact is acceptable if the number of repetitions is not too high. In our experiments running three times was enough.
+
+\subsection{Future work}
+
+For future work our plans can be divided in two different paths:
+\begin{itemize}
+\item {\it Fine-tuning} Using the \CP\ methodology fine tune our \FDI\ inliner for some different benchmarks. We have already finished some experiments and we are now defining some changes in our algorithms;
+
+\item {\it Apply \CP} We are devising a research path whereas we will apply \CP\ to different compiler transformations.
+
+\end{itemize}

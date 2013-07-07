@@ -1,0 +1,45 @@
+
+
+To further characterize the problem we are facing, we need to look at
+the bigger picture. We have some input points from the parameters, and
+an output, the time spent by one particular program to run. And we can
+compare a series of runs, with inlining, without inlining, using non-\FDO\
+inlining.
+
+With this starting point we have to define an error function and an algorithm
+to search for the optimal point if it exists, or at least to get as close as
+we can of it. But we don't really know any information about the space bounding
+the function. We are to define and then minimize the error function on an
+unknown space.
+
+Any well known machine learning algorithm such as gradient descent
+not necessarily will work properly in our environment because, as
+we mentioned in ~\ref{inlining:candidate}, the function to be optimized
+is not known to be differentiable nor convex. And the space that bounds
+the function is also unknown.
+
+One possible approach to this problem is to use other kinds of algorithms,
+such as, Simulated Annealing \cite{Zhong2009}, or SPSA - Simultaneous Perturbation Stochastic
+Approximation \cite{Spall1999,Spall2012}, because these algorithms have no
+supposition on the function and on the space. They are both non-deterministic,
+and make use of random points trying to avoid being trapped to a local minimum.
+
+Another possibility is to apply an unsupervised learning method, like reinforcement
+learning, and use its' returned policy to guide the possible changes (up, or down)
+in the values of the parameters. This approach can be fully automatized and corresponds
+to another research path.
+
+Consider the setting we have, four benchmarks and each benchmark has a few input entries. As we want to find the best set of parameters to get the least execution time, each execution time for each input is a feature, and we can use the total time (summation of all the execution times for a certain set -- parameter tunning, for example) as the function to be minimized. Also each value of running time we get is an outcome of a particular parameter setting. In this case we have:
+\begin{enumerate}
+ \item Enumeration of the inputs: All the inputs are collected and enumerated, defining a proper ordering.
+ \item $p$: Defines the parameter setting used to measure the running time. 
+ \item $\phi_i^p (t_i)$: Defines the feature corresponding to input $i$ of a benchmark; the feature is a mapping of the running time of input $i$ to a real number. We are using the running time directly.
+ \item Loss function: $\ell(x, y)$, defined to be $L_2$.
+\end{enumerate}
+
+And we define $T = \displaystyle\sum\limits_{i} \phi(i)$, as the total time to be minimized.
+
+From these definitions we can set a machine learning problem of trying to predict the total running time of a program when given a specific input, in this case we would search for a vector $w$ such that we can minimize the error given by the loss function $\ell(x, y)$:
+\[\arg\ \min_w^{\ast} \ell(X*w - y)\]
+
+Where $\psi$ represents the instance of parameters values that minimizes the error. From that perspective we can actually predict what will be the running time at any setting. Using this prediction we can now find the best set of parameters and then make an empirical evaluation based on it.

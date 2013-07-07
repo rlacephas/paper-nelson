@@ -1,0 +1,82 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: rr-method.aux
+The style file: IEEEtran.bst
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: local.bib
+You're missing a field name---line 613 of file local.bib
+ : 
+ : % pages =     {251 - 260},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 892 of file local.bib
+ : @inproceedings{SalverdaCGO08
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 902 of file local.bib
+ : @article{SavariYoungJIPL00
+ :                           ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 922 of file local.bib
+ : 
+ : % url = {http://doi.acm.org.login.ezproxy.library.ualberta.ca/10.1145/1618525.1618531},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 952 of file local.bib
+ : 
+ : % url = {http://doi.acm.org.login.ezproxy.library.ualberta.ca/10.1145/1026474.1026485},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--string name "oopsla" is undefined
+--line 963 of file local.bib
+Warning--string name "dynamo" is undefined
+--line 1038 of file local.bib
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty year in BerubeISPASS12
+Warning--empty booktitle in Arnold00
+Warning--empty booktitle in ArnoldOOPSLA05
+
+Done.
+You've used 16 entries,
+            4039 wiz_defined-function locations,
+            975 strings with 11792 characters,
+and the built_in function-call counts, 12761 in all, are:
+= -- 981
+> -- 291
+< -- 99
++ -- 158
+- -- 48
+* -- 634
+:= -- 1849
+add.period$ -- 36
+call.type$ -- 16
+change.case$ -- 17
+chr.to.int$ -- 252
+cite$ -- 19
+duplicate$ -- 921
+empty$ -- 1141
+format.name$ -- 63
+if$ -- 2968
+int.to.chr$ -- 0
+int.to.str$ -- 16
+missing$ -- 163
+newline$ -- 79
+num.names$ -- 16
+pop$ -- 412
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 955
+stack$ -- 0
+substring$ -- 606
+swap$ -- 720
+text.length$ -- 15
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 16
+warning$ -- 3
+while$ -- 62
+width$ -- 18
+write$ -- 179
+(There were 5 error messages)

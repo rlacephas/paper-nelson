@@ -1,0 +1,66 @@
+
+There are several researchers concerned with the problem of reliability in performance measures. Kalibera \etal\ \cite{Kalibera2013} propose a rigorous methodology for measuring time, and claim that the measurements are still done in reasonable time. Their methodology considers that the environment, consisting of hardware and software, versions of the operating system, versions of the compiler used to measure data, they all change scarcely. For this reason their methodology asserts that before starting to take any measurement the whole environment has to be deeply investigated to find how many repeated iterations are required to achieve an independent state (the execution times of benchmark iterations are statistically independent). They provide means to calculate the number of runs are needed to achieve independent states for a benchmark analysis, also for measuring speedups. They used different benchmarks in their experiments and showed that there are different number of repetition counts for them. Our methodology does not assume that the environment changes scarcely, and we don't need a huge number of repetitions.
+
+Mytkowicz \etal\ \cite{Mytkowicz2009} ran some experiments using SPEC CPU benchmarks and found significant systematic measurement errors in some sources, that could produce biased results. Their suggestion is to randomise the experimental setup to eliminate the bias. The idea of ramdomising is fully incorporated in Stabiliser \cite{Curtsinger2013}. Stabiliser is an LLVM-based compiler and runtime environment for randomisation of code, stack and heap layout. The purpose of randomisation is to reduce the need for repeated execution. Randomising the whole program in fact introduces more variation than in real systems, also some compiler transformations can become useless. Our approach is much less intrusive than theirs and we don't break compiler transformations.
+
+Georges \etal\ \cite{Georges2007} shows that different methodologies can lead to different conclusions. They work with Java benchmarks and recommends running multiple iterations of each Java benchmark within a single VM execution, and also multiple VM executions. Our work is not focused in Java, but their recommendation remains true, it is necessary to use a reliable experimental methodology.
+
+%============== Old text
+
+\subsection{\FDO-related}
+
+Most compilers take a single-run approach to \FDO: a single training run
+generates a profile, which is used to guide compiler transformations.
+Some profile file formats support the storage of multiple profiles
+(\eg, \llvm), but when such a file is provided to a compiler, either
+all profiles except the first are ignored, or a simple sum or average
+is taken across the frequencies in the collected profiles.
+
+Input characterization and workload reduction are not new problems.
+However, the similarity metrics used for clustering
+in \cite{BerubePhD} are unique in their applicability to
+workload reduction for an \FDO\ compiler.  Most input similarity and
+clustering work is done in the area of computer architecture, where
+research is largely simulation-based, thus necessitating small
+workloads of representative programs using minimally-sized inputs. The
+architectural metrics of benchmark programs are repeatedly scrutinized
+for redundancy, while smaller inputs are compared with large
+inputs. Alternatively, some work bypasses program behavior and
+examines the inputs directly.
+
+Arnold \etal. present an inlining strategy similar to that used in
+modern compilers~\cite{Arnold00}. They use a call-site sensitive call
+graph profile, thus allocating procedure executions frequencies to
+individual call sites.  Using code size expansion as the cost and
+call site frequency as the benefit, call sites are inlined in
+decreasing cost/benefit order up to a code expansion limit.  They
+find that a 1\% code size expansion limit accounts for 73\% of dynamic
+calls and reduces execution time by 9\% to 57\%.
+
+Arnold \etal. use histograms to combine the profile information
+collected by a Java JIT system over multiple program
+runs~\cite{ArnoldOOPSLA05}.  The online profiler detects hot methods
+by periodically sampling the currently-executing method.  After each
+run of a program, histograms for the hot methods stored in a profile
+repository are updated.
+
+Salverda \etal\ model the critical paths of a program by generating
+synthetic program traces from a histogram of profiled branch
+outcomes~\cite{SalverdaCGO08}. To better cover the program's
+footprint, they do an ad-hoc combination of profiles from SPEC
+training and reference inputs.  In contrast, combined profiling and
+hierarchical normalization provide a systematic method to combine
+profile information for multiple runs.
+
+Savari and Young build a branch and decision model for branch
+data~\cite{SavariYoungJIPL00}.  Their model assumes that the next
+branch and its outcome are independent of previous branches, an
+assumption that is violated by computer programs (\eg, correlated
+branches).  One distribution is used to represent {\em all events}
+from a run; distributions from multiple runs are combined using
+relative entropy --- a sophisticated way to find the weights for a
+weighted geometric average across runs.
+The model cannot provide
+specific information about a particular branch, which is exactly the
+information needed by \FDO.  However, this information is provided by
+combined profiles because each event is represented separately.

@@ -1,0 +1,150 @@
+
+
+Capturing behavior variations across inputs is important in the design
+of an \FDO\ compiler. A number of speculative code transformations are
+known to benefit from \FDO, including speculative partial redundancy
+elimination~\cite{ChowChanPLDI97,GuptaICCL98}, trace-based
+scheduling and others~\cite{BodikGuptaPLDI97,ChekuriMICRO96}.
+
+This section argues that the behavior
+variations in an application due to multiple inputs should be
+evaluated by \FDO\ decisions.  It also argues that a full parametric
+estimation of a statistical distribution is not only unnecessary, but
+it may also mislead FDO decisions if the wrong distribution is assumed
+or there is insufficient data to accurately estimate the
+parameters.
+
+A major challenge in the use of traditional single-training-run \FDO\
+is the selection of a profiling data input that is representative of
+the execution of the program throughout its lifetime.  For large and
+complex programs dealing with many use cases and used by a multitude
+of users, assembling an appropriately representative workload may be a
+difficult task.  Picking a solitary training run to represent such a
+space is far more challenging, or potentially impossible, if use-cases
+are mutually-exclusive.  While benchmark programs can be modified to
+combine such use-cases into a single run,
+this approach is obviously inapplicable to real programs.  Moreover,
+user workloads are prone to change over time.  Ensuring stable
+performance across all inputs in today's workload prevents performance
+degradation due to changes in the relative importance of workload
+components.
+
+The {\em Combined Profiling} (\CP) statistical modeling technique
+presented in ~\cite{BerubePhD} produces a {\it Combined Profile} (\CProf)
+from a collection of traditional single-run profiles, thus
+facilitating the collection and representation of profile information
+over multiple runs. The use of many profiling runs, in turn, eases the
+burden of training-workload selection and mitigates the potential for
+performance degradation.  There is no need to select a single input
+for training because data from any number of training runs can be
+merged into a combined profile.  More importantly, \CP\ preserves
+variations in execution behavior across inputs.  The distribution of
+behaviors can be queried and analyzed by the compiler when making
+code-transformation decisions.  Modestly profitable transformations
+can be performed with confidence when they are beneficial to the
+entire workload. On the other hand, transformations expected to be
+highly beneficial on average can be suppressed when performance
+degradation would be incurred on some members of the workload.
+
+Combining profiles is a three-step process \cite{BerubeISPASS12}:
+\begin{enumerate}
+\item Collect raw profiles via traditional profiling.
+\item Apply {\em Hierarchical Normalization} (\HN) to each raw profile. 
+\item Apply \CP\ to the normalized profiles to create the combined profile.
+\end{enumerate}
+
+\CP\ and \HN\ have been presented in previous 
+work~\cite{BerubeICPE11,BerubeISPASS12}. 
+However, a clearer and expanded version, based on previous versions, can
+be found in ~\cite{BerubePhD}, particularly the
+description of \CP's histograms and the discussion of queries.
+
+\CP\ ~\cite{BerubePhD} provides a data representation for profile information, but does
+not specify the semantics of the information stored in the combined
+profile.  Raw profiles cannot be combined naively. 
+
+\subsection{Hierarchical Normalization}
+\label{cp:hn}
+
+There is a problem when pairs of measurements are taken under different
+conditions.  Thus, when
+combining these measurements, all values recorded for a monitor must
+be normalized relative to a common fixed reference.  {\em Hierarchical
+  normalization} (\HN) ~\cite{BerubePhD} is a profile semantic designed for use with
+\CP\ that achieves this goal by decomposing a \CFG\ into a hierarchy
+of dominating regions.
+
+\HN\ is presented for edge profiling.  Vertex profiles are treated
+identically, but use the domination relationships between vertexes
+instead of edges.  Domination is usually defined in terms of vertexes.
+In order to use an existing implementation of a vertex dominator-tree
+algorithm with edge profiles, use the line graph of the \CFG\ instead of
+the \CFG\ itself.  The line graph contains one vertex for each edge in
+the \CFG, and edges in the line graph correspond to adjacencies
+between the edges of the \CFG.
+
+\subsection{Denormalization}
+\label{cp:denorm}
+
+The properties of a monitor $R_a$ can only be directly compared to
+those of a monitor $R_b$ when $dom(a) = dom(b)$.  However, more
+generalized reasoning about $R_a$ may be needed when considering code
+transformations.  Similarly, when code is moved by a transformation,
+its profile information must be correctly updated. {\it
+  Denormalization} reverses the effects of hierarchical normalization
+to lift monitors out of nested domination regions by marginalizing-out
+the distribution of the dominators above which they are lifted.
+Denormalization is a heuristic method rather than an exact statistical
+inference because it assumes statistical independence between monitors.
+
+\subsection{Queries}
+\label{cp:queries}
+
+In an AOT compiler, profiles are used to predict program behavior.
+Thus, raw profiles are statistical models that use a single sample to
+answer exactly one question: {\em ``What is the expected frequency of
+  X?''}  where X is an edge or path in a \CFG\ or a Call Graph (\CG).
+A \CP\ is a much richer statistical model that can answer a wide range
+of queries about the measured program behavior.  The implementation of
+\CP\ used in this work provides the following statistical queries as
+methods of a monitor's histogram:
+\begin{description}
+
+\item[$H.\mathrm{min}, H.\mathrm{max}$]: 
+
+\item[$H.\mathrm{mean}(\mathit{incl0s})$]: 
+
+\item[$H.\mathrm{stdev}(\mathit{incl0s})$]: 
+
+\item[$H.\mathrm{estProbLessThan}(v)$]: 
+
+\item[$H.\mathrm{quantile(q)}$]: 
+
+\item[$H.\mathrm{applyOnRange}(F(w,v),\mathit{vmin},\mathit{vmax})$]: 
+
+\item[$H.\mathrm{applyOnQuantile}(F(w,v),\mathit{qmin},\mathit{qmax})$]: 
+
+\item[$H.\mathrm{coverage}$]: 
+
+\item[$H.\mathrm{span}$]: 
+
+\end{description}
+
+\CP\ enables the accurate assessment of the
+potential performance impact of transformations informed by
+variable-behavior monitors in a variety of ways, and with adjustable
+confidence in the result. Concrete examples of this kind of analysis
+are provided by the implementation of an \FDO\ inliner using
+\CP\ described in \cite{BerubePhD}.
+
+
+\subsection{Alternative Usage}
+\label{cp:extend}
+
+The empirical-distribution methodology of \CP\ is orthogonal to the
+techniques used to collect raw profiles.  \CP\ is applicable whenever
+multiple profile instances are collected, including intra-run
+phase-based profiles, profiles collected from hardware
+performance-counter, and sampled profiles.  The main issue when
+combining profiles is how normalization should be done in order to
+preserve program-behavior characteristics.
