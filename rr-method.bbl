@@ -44,6 +44,13 @@ C.~Lattner and V.~Adve, ``{LLVM: A Compilation Framework for Lifelong Program
   Analysis \& Transformation},'' in \emph{Code Generation and Optimization
   ({CGO})}, San Jose, CA, USA, March 2004.
 
+\bibitem{Curtsinger2013}
+\BIBentryALTinterwordspacing
+C.~Curtsinger and E.~D. Berger, ``Stabilizer: statistically sound performance
+  evaluation,'' \emph{SIGPLAN Not.}, vol.~48, no.~4, pp. 219--228, Mar. 2013.
+  [Online]. Available: \url{http://doi.acm.org/10.1145/2499368.2451141}
+\BIBentrySTDinterwordspacing
+
 \bibitem{ChowChanPLDI97}
 F.~Chow, S.~Chan, R.~Kennedy, S.-M. Liu, R.~Lo, and P.~Tu, ``A new algorithm
   for partial redundancy elimination based on {SSA} form,'' in \emph{Conference
@@ -81,13 +88,6 @@ T.~Mytkowicz, A.~Diwan, M.~Hauswirth, and P.~F. Sweeney, ``Producing wrong data
   and operating systems}, ser. ASPLOS XIV.\hskip 1em plus 0.5em minus
   0.4em\relax New York, NY, USA: ACM, 2009, pp. 265--276. [Online]. Available:
   \url{http://doi.acm.org/10.1145/1508244.1508275}
-\BIBentrySTDinterwordspacing
-
-\bibitem{Curtsinger2013}
-\BIBentryALTinterwordspacing
-C.~Curtsinger and E.~D. Berger, ``Stabilizer: statistically sound performance
-  evaluation,'' \emph{SIGPLAN Not.}, vol.~48, no.~4, pp. 219--228, Mar. 2013.
-  [Online]. Available: \url{http://doi.acm.org/10.1145/2499368.2451141}
 \BIBentrySTDinterwordspacing
 
 \bibitem{Georges2007}

@@ -66,11 +66,51 @@ We ran our experiments on $20$ Dell Optiplex 755, whose characteristics are:
 
 \subsection{Presenting the results}
 
-We employed a single-run methodology for the experiments and we used three benchmarks to test our hypotheses, \bzip, \gzip, and \gcc. The results are presented in the following way, we grouped the \bzip\ with \gzip, and separate \gcc\ to another section. We decided to present the results for \bzip\ and \gzip\ together because these programs have similar behavior and \gcc\ has a completely different behaviour.
+We employed a single-run methodology for the experiments and we used three benchmarks to test our hypotheses, \bzip, \gzip, and \gcc. The results are presented in the following way, we grouped the \bzip\ with \gzip, and separate \gcc\ to another section. We decided to present the results for \bzip\ and \gzip\ together because these programs have similar behavior and \gcc\ has a completely different behavior.
+
+\subsubsection{\Gcc\ Benchmark}
+
+For the \gcc\ benchmark we were able to report a significant result, we measured a $5.88 \%$ speedup over \llvm\, and a $7.09 \%$ speedup over Never (no inlining), whereas \llvm\ achieved a $1.29 \%$ speedup over never, using the set of inputs described above. This result is summarized in \refTable{tab:speedupgcc} below. The results are normalized by the baseline Never (no inlining).
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedup}
+  \end{tiny}
+  \caption{Summary of the data collected during the experiment with \gcc}
+  \label{tab:speedupgcc}
+\end{table}
+
+The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains our speedup. But this particular experiment shows a good result, for the speedup is somewhat high.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc}
+  \caption{Running times of the \gcc\ inlined versions, normalized by Never}
+  \label{fig:speedupgcc}
+\end{figure}
+
+Nevertheless, we can show how we can improve this result by just choosing less inputs from the original input set. In this case we can report a speedup of $7.76 \%$ over \llvm, as shown in \refTable{tab:speedupgcc1} and \refFigure{fig:speedupgcc1}.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedup1}
+  \end{tiny}
+  \caption{Extract of the data collected during the experiment with \gcc}
+  \label{tab:speedupgcc1}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc1}
+  \caption{Extract of the running times of the \gcc\ inlined versions, normalized by Never}
+  \label{fig:speedupgcc1}
+\end{figure}
 
 \subsubsection{Compressors / Decompressors}
 
-We will start by describing our experiments with the data collected from the \bzip\ runs are summarized in \refTable{tab:speedupb}. In this table we show that we achieved a slight speedup of $1.36 \%$ over \llvm\ results.
+We will start by describing our experiments with the data collected from the \bzip\ runs are summarized in \refTable{tab:speedupb}. In this table we show that we achieved a slight speedup of $1.36 \%$ over \llvm\ results, and $1.40 \%$ over Never (no inlining), whereas \llvm\ achieved a speedup of $0.04 \%$ over Never.
 
 \begin{table}
   \centering
@@ -81,7 +121,7 @@ We will start by describing our experiments with the data collected from the \bz
   \label{tab:speedupb}
 \end{table}
 
-\refFigure{fig:speedup} shows the running time normalized by the time of Never (no inlining). We can see that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains our speedup. The experiment on the program \bzip\ shed some light and these results can be fully explored in future research.
+\refFigure{fig:speedup} shows the running time normalized by the time of Never (no inlining). We can see that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, the same way the former experiments did. The experiment on the program \bzip\ shed some light and these results can be fully explored in future research.
 
 \begin{figure}
   \centering
@@ -90,7 +130,7 @@ We will start by describing our experiments with the data collected from the \bz
   \label{fig:speedup}
 \end{figure}
 
-The final speedup, despite being a slight improvement, represents that the \FDI\ inliner can actually be employed instead of the \llvm\ inliner. And this result is significant because the program \bzip\ is small, simple, and not particularly fitted to inlining, leading to a conjecture that \FDI\ inliner are better than static ones. Which opens a wide range of experiments with other programs to confirm this conjecture. We ran also with \gzip, which happens to be quite similar to \bzip, and confirmed a speedup of $2.09 \%$ over \llvm\ results. These results can be seen in \refTable{tab:speedupz}, where the times are already normalized by the baseline Never (no inlining). \refFigure{fig:speedupz} shows the normalized running time for \gzip, and it also outperforms Never and \llvm through all inputs.
+The final speedup, despite being a slight improvement, represents that the \FDI\ inliner can actually be employed instead of the \llvm\ inliner. And this result is significant because the program \bzip\ is small, simple, and not particularly fitted to inlining, leading to a conjecture that \FDI\ inliner are better than static ones. Which opens a wide range of experiments with other programs to confirm this conjecture. We ran also with \gzip, which happens to be quite similar to \bzip, and confirmed a speedup of $2.09 \%$ over \llvm\ results, and a speedup of $1.50 \%$ over Never (no inlining) and \llvm\ got a slowdown of $0.61 \%$. These results can be seen in \refTable{tab:speedupz}, where the times are already normalized by the baseline Never (no inlining). \refFigure{fig:speedupz} shows the normalized running time for \gzip, and it also outperforms Never and \llvm through all inputs.
 
 \begin{table}
   \centering
@@ -109,46 +149,6 @@ The final speedup, despite being a slight improvement, represents that the \FDI\
 \end{figure}
 
 The results of the experiment are also consistent with other similar findings in the literature, whereas employing single-run experiments does not generate any kind of disturbance in the analysis, and the speedup result are statistically sound. So we can confirm a speedup over the static inliner for the \bzip\ and \gzip\ cases.
-
-\subsubsection{\Gcc\ Benchmark}
-
-For the \gcc\ benchmark we were able to report a more significant result, we measured a $5.88 \%$ speedup over \llvm\ using the set of inputs described above. This result is summarized in \refTable{tab:speedupgcc} below. The results are normalized by the baseline Never.
-
-\begin{table}
-  \centering
-  \begin{tiny}
-  \input{Tables/speedup}
-  \end{tiny}
-  \caption{Summary of the data collected during the experiment with \gcc}
-  \label{tab:speedupgcc}
-\end{table}
-
-The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, the same way the former experiments did. But this particular experiment shows a much better result, for the speedup is much higher.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc}
-  \caption{Running times of the \gcc\ inlined versions, normalized by Never}
-  \label{fig:speedupgcc}
-\end{figure}
-
-Nevertheless, we can show how we can improve this result by just choosing less inputs from the original input set. In this case we can report a speedup of $7.76 \%$, as shown in \refTable{tab:speedupgcc1} and \refFigure{fig:speedupgcc1} below.
-
-\begin{table}
-  \centering
-  \begin{tiny}
-  \input{Tables/speedup1}
-  \end{tiny}
-  \caption{Extract of the data collected during the experiment with \gcc}
-  \label{tab:speedupgcc1}
-\end{table}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc1}
-  \caption{Extract of the running times of the \gcc\ inlined versions, normalized by Never}
-  \label{fig:speedupgcc1}
-\end{figure}
 
 \subsubsection{A slowdown}
 \label{sec:slowdown}
