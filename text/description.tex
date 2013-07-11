@@ -3,31 +3,19 @@ The goal of benchmark-based evaluation is to predict the performance for the cod
 
 %======== Framework, describe
 
-Our framework was built up from \llvm\ development framework, and we employ it to investigate compiler transformations. The transformation we are interested in this research, as aforementioned, is inlining. Our framework is composed by a set of programs, written in C++, and a set of scripts, which controls the training process, the compiling process, and the testing process. The use this framework allows to have single-run training and testing, and \CP-run for training and testing as well. The number of consecutive runs is parameterized, so we have to define how many runs are needed beforehand. The framework is described in detail in \cite{BerubePhD}.
+This performance evaluation uses an infrastructure based on the \llvm\ development framework. This infrastructure includes a set of C++ programs and a set of scripts to control the machine-learning training, the compilation and the exaction of performance runs. This single infrastructure offers the option of performing both single-run-training/single-run-testing \FDO and  \CP-based \FDO with multiple-run performance evaluation. The number of runs used for \CP\ and for the evaluation are parameters set by the experimenter~\cite{BerubePhD}.
 
 %======== Setting: machines, inputs, describe
 
-The experiments were conducted on $20$ Dell Optiplex 755 running Slackware Linux 2.6.32.39. The hardware characteristics are:
-\begin{itemize}
+The experiments were conducted on $20$ Dell Optiplex 755 running Slackware Linux 2.6.32.39 each equipped with Intel Duo Core E6750 2.66 GHz processors, 4 GB RAM, DVD-RW drive, Intel Pro/1000 Gb ethernet, Gigabyte GeForce 8600 video cards, and 250 GB SATA II drive. 
 
-\item Intel Duo Core E6750 2.66 GHz processor;
+For the case study with the SPEC CPU 2006  \gcc, each program is evaluated using a 15-input workload. The eleven inputs distributed with SPEC CPU 2006 are augmented with  four SPEC 2000 benchmark programs used as input, after conversion to the single pre-processed file format required, to \gcc: \bzip, \lbm, \mcf, and \parser.
 
-\item 4 GB RAM;
+For the case studies with \bzip\ and \gzip, the code used is not the one distributed by SPEC, but rather fully-functional versions of these programs. Using these versions eliminates the unrealistically-simplified profiling situation where mutually-exclusive use cases are combined into a single program run. Consequently, these programs cannot do decompression and compression, or multiple levels of compression, within the same run.  These distinct use-cases must be covered by different inputs in the program workload.
 
-\item DVD-RW drive;
+The inputs for compression include images, ebooks in a variety of formats, movies in MP4 format, textual representation of proteins, audio books, and object files~\cite{BerubePhD}.
 
-\item Intel Pro/1000 Gb ethernet;
-
-\item Gigabyte GeForce 8600 video cards;
-
-\item 250 GB SATA II drive. 
-
-\end{itemize}
-
-In our framework, each program is evaluated using a 15-input workload, as suggested in \cite{BerubePhD}. \Gcc\ is taken from the SPEC CPU 2006 benchmark suite.  SPEC provides 11 inputs for \gcc. In spite of the challenges involved in creating new inputs for this benchmark, four\footnote{of seven attempts} of the SPEC 2000 benchmark programs were converted to the single pre-processed file format. The converted programs are \bzip, \lbm, \mcf, and \parser.
-
-Following \cite{BerubePhD}, the inputs for programs \bzip\ and \gzip, were not extracted from the SPEC CPU 2006 benchmark suite, rather than the fully-functional ``real'' versions. Using the real versions of the compressor programs eliminates the unrealistically-simplified profiling situation where mutually-exclusive use cases are combined into a single program run. Consequently, these programs cannot do decompression and compression, or multiple levels of compression, within the same run.  These distinct use-cases must be covered by different inputs in the program workload.
-
+\REM{
 The compression set contains the following inputs, with the compression level shown in parentheses:
 \begin{itemize}
 
@@ -46,6 +34,7 @@ The compression set contains the following inputs, with the compression level sh
 \item {\tt usrlib-so (-9)}: A collection of shared object (.so) files from {\tt /usr/lib/} of a 32-bit gentoo-linux machine.
 
 \end{itemize}
+
 
 The decompression set for each compressor uses the same base set of files, pre-compressed by the appropriate compressor at the default compression level.  The decompression set is composed of:
 \begin{itemize}
@@ -66,11 +55,13 @@ The decompression set for each compressor uses the same base set of files, pre-c
 \item {\tt sherlock-mp3}: The audio book ``The Adventures of Sherlock Holmes'' in MP3 format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/28733}.
 
 \end{itemize}
+}
 
 %======== The inlining parameters
 
+\REM{
 As \FDI\ has a set of parameters that can vary and produce different running time for the programs, it was necessary to have a decision on the values for the set of parameter. These parameter values are the same through all benchmarks, and by using them the runtime results are quite similar to \llvm\ on average. That is why they were chosen, it is a very good parameter set for the purpose of this research.
-
+}
 %======= Reinforce the purpose
 
 The experiments conducted had the purpose of demonstrating the inadequacy of single-run methodologies by exhibiting, with the same set of data, speedups and slowdowns, depending on which pairs of data are used to compare runtime outcomes. Alongside the input set used in the experiments was also stressed in a way to show that some great results can be a lot blurred with a more complete input set.
