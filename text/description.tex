@@ -1,0 +1,78 @@
+
+The goal of benchmark-based evaluation is to predict the performance for the code transformation studied for actual applications that resemble the benchmark used in the evaluation. An issue with many of the performance evaluation of \FDO-based code transformations published in the literature is the lack of exploration of the effect of different data input to the code on the reported results. An interesting question is how far off the mark a performance evaluation study that considers a single data input may be from the actual performance that the benchmark-based evaluation is predicting. The goal of this section is to investigate the potential error in the prediction for the case of \FDI using combined profiling. We designed an experiment to compare an \FDI\ with the standard inliner from \llvm: (1) Select a reasonable set of data inputs for a given benchmark; (2) Execute all combinations of single-input profiling/single-input testing for the \FDO\ inliners, repeating each test run a sufficient number of times needed to capture runtime variances;\footnote{For the experiments described in this paper an empirical statistical study using 1000 runs revealed that three runs were sufficient.} ; (3) Run the \llvm\ inliner on all inputs --- the same number of times as in (2) for each input; (4) To demonstrate a superior performance of \FDI, select the best run amongst all profiling/testing combinations for a given test input and compare with the worst run for the \llvm\ inliner; (5) To demonstrate inferior performance of \FDI, do the opposite, look for the worst \FDI\ run and the best \llvm\ run for a given test input; (6) To find what the actual comparison is, use all but the test input to generate a combined profile and use this combined profile in \FDI; execute this binary the necessary number of times and compare the average of these runs with the average of the same number of runs using the \llvm\ inliner.
+
+%======== Framework, describe
+
+Our framework was built up from \llvm\ development framework, and we employ it to investigate compiler transformations. The transformation we are interested in this research, as aforementioned, is inlining. Our framework is composed by a set of programs, written in C++, and a set of scripts, which controls the training process, the compiling process, and the testing process. The use this framework allows to have single-run training and testing, and \CP-run for training and testing as well. The number of consecutive runs is parameterized, so we have to define how many runs are needed beforehand. The framework is described in detail in \cite{BerubePhD}.
+
+%======== Setting: machines, inputs, describe
+
+The experiments were conducted on $20$ Dell Optiplex 755 running Slackware Linux 2.6.32.39. The hardware characteristics are:
+\begin{itemize}
+
+\item Intel Duo Core E6750 2.66 GHz processor;
+
+\item 4 GB RAM;
+
+\item DVD-RW drive;
+
+\item Intel Pro/1000 Gb ethernet;
+
+\item Gigabyte GeForce 8600 video cards;
+
+\item 250 GB SATA II drive. 
+
+\end{itemize}
+
+In our framework, each program is evaluated using a 15-input workload, as suggested in \cite{BerubePhD}. \Gcc\ is taken from the SPEC CPU 2006 benchmark suite.  SPEC provides 11 inputs for \gcc. In spite of the challenges involved in creating new inputs for this benchmark, four\footnote{of seven attempts} of the SPEC 2000 benchmark programs were converted to the single pre-processed file format. The converted programs are \bzip, \lbm, \mcf, and \parser.
+
+Following \cite{BerubePhD}, the inputs for programs \bzip\ and \gzip, were not extracted from the SPEC CPU 2006 benchmark suite, rather than the fully-functional ``real'' versions. Using the real versions of the compressor programs eliminates the unrealistically-simplified profiling situation where mutually-exclusive use cases are combined into a single program run. Consequently, these programs cannot do decompression and compression, or multiple levels of compression, within the same run.  These distinct use-cases must be covered by different inputs in the program workload.
+
+The compression set contains the following inputs, with the compression level shown in parentheses:
+\begin{itemize}
+
+\item {\tt avernum (-3)}: The installer for the demo version of the game  ``Avernum: Escape from the Pit'' from Spiderweb Software.
+
+\item {\tt cards (-4)}: A collection of greeting card layouts in the TIFF (uncompressed) image format.
+
+\item {\tt ebooks (-5)}: A collection of ebooks, with and without images, and in a variety of formats, from Project Gutenberg\footnote{http://www.gutenberg.org}.
+
+\item {\tt potemkin-mp4 (-6)}: The 1925 movie ``Bronenosets Potyomkin (Battleship Potemkin)'' in MP4 format, from the Internet Archive\footnote{http://archive.org/details/BattleshipPotemkin}.
+
+\item {\tt proteins-1 (-7)}: A sample of 33 proteins from the RCSB Protein Data Bank database.  6 files for each protein, each stored in a different text-based format, provide different characteristics of the protein's structure\footnote{http://www.rcsb.org}.
+
+\item {\tt revelation-ogg (-8)}: The audio book ``The Revelation of Saint John'' in OGG format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/22945}.
+
+\item {\tt usrlib-so (-9)}: A collection of shared object (.so) files from {\tt /usr/lib/} of a 32-bit gentoo-linux machine.
+
+\end{itemize}
+
+The decompression set for each compressor uses the same base set of files, pre-compressed by the appropriate compressor at the default compression level.  The decompression set is composed of:
+\begin{itemize}
+\item {\tt auriel}: The ``Auriel's Retreat'' land-mass addition mod by lance4791 for the game ``The Elder Scrolls IV: Oblivion'' from Bethesda Softworks\footnote{http://planetelderscrolls.gamespy.com/View.php?view=\\ \hspace*{150 pt}OblivionMods.Detail\&id=5949}.
+
+\item {\tt gcc-453}: The source-code archive of the \gcc\ compiler, version 4.5.3\footnote{http://gcc.gnu.org/gcc-4.5}.
+
+\item {\tt lib-a}: A collection of library files (.a) from {\tt /lib/} of a gentoo-linux machine.  As per the gentoo development guide, a library will be installed in {\tt /lib} (boot critical) or {\tt /usr/lib} (general applications), but not both\footnote{http://devmanual.gentoo.org/general-concepts/filesystem/index.html}.
+
+\item {\tt mohicans-ogv}: The 1920 movie ``Last of the Mohicans'' in OGV (ogg video) format, from the Internet Archive\footnote{http://archive.org/details/last\_of\_the\_mohicans\_1920}.
+
+\item {\tt ocal-019}: The Open Clip Art Library archive, version 0.19. The images are primarily in vector-graphics formats\footnote{http://openclipart.org/collections}.
+
+\item {\tt paintings-jpg}: A collection of watercolor paintings, in JPG format.
+
+\item {\tt proteins-2}: A completely different sample of 157 proteins from the RCSB Protein Data Bank database, each in 6 different file formats.
+
+\item {\tt sherlock-mp3}: The audio book ``The Adventures of Sherlock Holmes'' in MP3 format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/28733}.
+
+\end{itemize}
+
+%======== The inlining parameters
+
+As \FDI\ has a set of parameters that can vary and produce different running time for the programs, it was necessary to have a decision on the values for the set of parameter. These parameter values are the same through all benchmarks, and by using them the runtime results are quite similar to \llvm\ on average. That is why they were chosen, it is a very good parameter set for the purpose of this research.
+
+%======= Reinforce the purpose
+
+The experiments conducted had the purpose of demonstrating the inadequacy of single-run methodologies by exhibiting, with the same set of data, speedups and slowdowns, depending on which pairs of data are used to compare runtime outcomes. Alongside the input set used in the experiments was also stressed in a way to show that some great results can be a lot blurred with a more complete input set.
+
+In the next section the single-run experiment is presented as if it was a great achievement, a result from a correct and proper experiment following a sound methodology. So, the data in next section was selected to produce the speedup. After that in \refSection{sec:robust} the speedups are statistically explained, and the full picture is shown.
