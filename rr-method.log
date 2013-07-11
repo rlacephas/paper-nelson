@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.8.13)  9 JUL 2013 17:24
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.8.13)  11 JUL 2013 13:27
 entering extended mode
  %&-line parsing enabled.
 **rr-method.tex
@@ -287,11 +287,11 @@ ftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 14.
+LaTeX Font Info:    Try loading font information for U+msa on input line 16.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 14.
+LaTeX Font Info:    Try loading font information for U+msb on input line 16.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -300,66 +300,67 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 2.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [2]) (./text/speedup.tex
-[3] (./Tables/speedup.tex)
-<Figures/speedupgcc.pdf, id=18, 440.64626pt x 264.99pt>
+) [2])
+(./text/description.tex [3]) [4] (./text/speedup.tex (./Tables/speedup.tex)
+<Figures/speedupgcc.pdf, id=21, 440.64626pt x 264.99pt>
 File: Figures/speedupgcc.pdf Graphic file (type pdf)
 
 <use Figures/speedupgcc.pdf> (./Tables/speedup1.tex)
-<Figures/speedupgcc1.pdf, id=19, 382.42876pt x 229.85875pt>
+<Figures/speedupgcc1.pdf, id=22, 382.42876pt x 229.85875pt>
 File: Figures/speedupgcc1.pdf Graphic file (type pdf)
 
-<use Figures/speedupgcc1.pdf> (./Tables/speedupb.tex)
-<Figures/speedupb.pdf, id=20, 368.37625pt x 173.64874pt>
+<use Figures/speedupgcc1.pdf> [5] (./Tables/speedupb.tex)
+<Figures/speedupb.pdf, id=27, 368.37625pt x 173.64874pt>
 File: Figures/speedupb.pdf Graphic file (type pdf)
 
-<use Figures/speedupb.pdf> [4 <./Figures/speedupgcc.pdf> <./Figures/speedupgcc1
-.pdf>] (./Tables/speedupz.tex)
-<Figures/speedup.pdf, id=327, 363.3575pt x 218.8175pt>
+<use Figures/speedupb.pdf> (./Tables/speedupz.tex)
+<Figures/speedup.pdf, id=28, 363.3575pt x 218.8175pt>
 File: Figures/speedup.pdf Graphic file (type pdf)
 
-<use Figures/speedup.pdf> (./Tables/slowdownb.tex) (./Tables/slowdownz.tex)
-(./Tables/slowdown.tex)) (./text/robust.tex [5 <./Figures/speedupb.pdf> <./Figu
-res/speedup.pdf>] <Figures/nt1000.pdf, id=535, 1026.83624pt x 727.71875pt>
+<use Figures/speedup.pdf> [6 <./Figures/speedupgcc.pdf> <./Figures/speedupgcc1.
+pdf> <./Figures/speedupb.pdf>] (./Tables/slowdownb.tex) (./Tables/slowdownz.tex
+) (./Tables/slowdown.tex)) (./text/robust.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+<Figures/nt1000.pdf, id=443, 1026.83624pt x 727.71875pt>
 File: Figures/nt1000.pdf Graphic file (type pdf)
 
-<use Figures/nt1000.pdf> (./Tables/robustTest.tex) (./Tables/tTest.tex)
-<Figures/ebooks300.pdf, id=536, 1026.83624pt x 758.835pt>
+<use Figures/nt1000.pdf> [7 <./Figures/speedup.pdf>] (./Tables/robustTest.tex)
+(./Tables/tTest.tex) <Figures/ebooks300.pdf, id=544, 1026.83624pt x 758.835pt>
 File: Figures/ebooks300.pdf Graphic file (type pdf)
 
 <use Figures/ebooks300.pdf>
-<Figures/ebooks.pdf, id=537, 476.78125pt x 375.4025pt>
+<Figures/ebooks.pdf, id=545, 476.78125pt x 375.4025pt>
 File: Figures/ebooks.pdf Graphic file (type pdf)
 
-<use Figures/ebooks.pdf> [6 <./Figures/nt1000.pdf> <./Figures/ebooks300.pdf> <.
-/Figures/ebooks.pdf>] (./Tables/simStats.tex) (./Tables/statTest.tex)
-Underfull \vbox (badness 7362) has occurred while \output is active []
-
- [7]
+<use Figures/ebooks.pdf> (./Tables/simStats.tex) [8 <./Figures/nt1000.pdf> <./F
+igures/ebooks300.pdf> <./Figures/ebooks.pdf>] (./Tables/statTest.tex)
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Figures/fdllrep.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<Figures/fdllrep.pdf, id=556, 490.83376pt x 375.4025pt>
+<Figures/fdllrep.pdf, id=559, 490.83376pt x 375.4025pt>
 File: Figures/fdllrep.pdf Graphic file (type pdf)
 
-<use Figures/fdllrep.pdf> (./Tables/fullexp.tex) [8 <./Figures/fdllrep.pdf>]
-<Figures/gzipfdll.pdf, id=567, 485.815pt x 375.4025pt>
+<use Figures/fdllrep.pdf> [9] (./Tables/fullexp.tex)
+<Figures/gzipfdll.pdf, id=563, 485.815pt x 375.4025pt>
 File: Figures/gzipfdll.pdf Graphic file (type pdf)
 
-<use Figures/gzipfdll.pdf> (./Tables/fullspeedup.tex)
-<Figures/speedupgccall.pdf, id=568, 510.90875pt x 307.1475pt>
+<use Figures/gzipfdll.pdf> [10 <./Figures/fdllrep.pdf> <./Figures/gzipfdll.pdf>
+] (./Tables/fullspeedup.tex)
+<Figures/speedupgccall.pdf, id=578, 510.90875pt x 307.1475pt>
 File: Figures/speedupgccall.pdf Graphic file (type pdf)
 
 <use Figures/speedupgccall.pdf>
-<Figures/gcc-results.pdf, id=569, 433.62pt x 325.215pt>
+<Figures/gcc-results.pdf, id=579, 433.62pt x 325.215pt>
 File: Figures/gcc-results.pdf Graphic file (type pdf)
 
 <use Figures/gcc-results.pdf>) (./text/cmbprof.tex
-Underfull \vbox (badness 2717) has occurred while \output is active []
+Underfull \vbox (badness 1728) has occurred while \output is active []
 
- [9 <./Figures/gzipfdll.pdf> <./Figures/speedupgccall.pdf>] [10 <./Figures/gcc-
-results.pdf>]) (./text/related.tex [11]) (./text/conclusion.tex) (./rr-method.b
-bl [12])
+ [11 <./Figures/speedupgccall.pdf> <./Figures/gcc-results.pdf>]) (./text/relate
+d.tex
+[12]) (./text/conclusion.tex [13]) (./rr-method.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -371,17 +372,17 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[13
+[14
 
 ] (./rr-method.aux) ) 
 Here is how much of TeX's memory you used:
- 4084 strings out of 495061
- 56249 string characters out of 1182621
- 152834 words of memory out of 3000000
- 7145 multiletter control sequences out of 15000+50000
+ 4087 strings out of 495061
+ 56308 string characters out of 1182621
+ 153853 words of memory out of 3000000
+ 7146 multiletter control sequences out of 15000+50000
  49608 words of font info for 104 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,11n,24p,1662b,357s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,11n,24p,1994b,357s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</us
 r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/tex
 mf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/f
@@ -394,9 +395,9 @@ texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type
 1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.
 pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texm
 f-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on rr-method.pdf (13 pages, 621361 bytes).
+Output written on rr-method.pdf (14 pages, 629970 bytes).
 PDF statistics:
- 890 PDF objects out of 1000 (max. 8388607)
+ 893 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
