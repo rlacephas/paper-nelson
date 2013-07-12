@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.8.13)  11 JUL 2013 18:29
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.8.13)  12 JUL 2013 14:15
 entering extended mode
  %&-line parsing enabled.
 **rr-method.tex
@@ -392,7 +392,7 @@ texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type
 1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.
 pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texm
 f-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on rr-method.pdf (13 pages, 619445 bytes).
+Output written on rr-method.pdf (13 pages, 619440 bytes).
 PDF statistics:
  890 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
