@@ -19,6 +19,8 @@
 \@writefile{toc}{\contentsline {section}{\numberline {III}Description of the experiments}{3}}
 \newlabel{sec:description}{{III}{3}}
 \citation{BerubePhD}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Case Study 1: {\tt  gcc}}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Case Study 1: {\tt  bzip2}\ and {\tt  gzip}}{4}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Reporting a speedup measured using {\leavevmode {\color  {Magenta}FDI}}\ }{4}}
 \newlabel{sec:speedup}{{IV}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Presenting the results}{4}}
@@ -27,13 +29,13 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Running times of the {\tt  gcc}\ inlined versions, normalized by Never}}{4}}
 \newlabel{fig:speedupgcc}{{1}{4}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}1}{\tt  Gcc}\ Benchmark}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}2}Compressors / Decompressors}{4}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Extract of the data collected during the experiment with {\tt  gcc}}}{4}}
 \newlabel{tab:speedupgcc1}{{II}{4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Extract of the running times of the {\tt  gcc}\ inlined versions, normalized by Never}}{5}}
 \newlabel{fig:speedupgcc1}{{2}{5}}
 \@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Summary of the data collected during the experiment with {\tt  bzip2}}}{5}}
 \newlabel{tab:speedupb}{{III}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}2}Compressors / Decompressors}{5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Running times of the {\tt  bzip2}\ inlined versions, normalized by Never}}{5}}
 \newlabel{fig:speedup}{{3}{5}}
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Summary of the data collected during the experiment with {\tt  gzip}}}{5}}
@@ -42,6 +44,8 @@
 \newlabel{fig:speedupz}{{4}{5}}
 \newlabel{sec:slowdown}{{\unhbox \voidb@x \hbox {IV-A}3}{5}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}3}A slowdown}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Statistical considerations on speedups and slowdowns}{5}}
+\newlabel{sec:robust}{{V}{5}}
 \@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Data reflecting a slowdown on {\tt  bzip2}}}{5}}
 \newlabel{tab:slowdownb}{{V}{5}}
 \citation{Kalibera2013}
@@ -50,8 +54,6 @@
 \newlabel{tab:slowdownz}{{VI}{6}}
 \@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Data reflecting a slowdown on {\tt  gcc}}}{6}}
 \newlabel{tab:slowdowngcc}{{VII}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Statistical considerations on speedups and slowdowns}{6}}
-\newlabel{sec:robust}{{V}{6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Running $1000$ times the same program with the same input data}}{6}}
 \newlabel{fig:gauss}{{5}{6}}
 \@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Simple statistics on the experiment}}{6}}
@@ -68,15 +70,19 @@
 \newlabel{fig:CProbust}{{6}{7}}
 \@writefile{lot}{\contentsline {table}{\numberline {X}{\ignorespaces Deviation from the mean and from the median in the experiment}}{7}}
 \newlabel{tab:simStats}{{X}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Analyzing the speedup results}{7}}
 \@writefile{lot}{\contentsline {table}{\numberline {XI}{\ignorespaces Test on the means}}{8}}
 \newlabel{tab:statTest}{{XI}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Analyzing the speedup results}{8}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}1}Compressor / Decompressor}{8}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The $18$ different settings for {\tt  bzip2}\ of the same setup}}{8}}
 \newlabel{fig:fdllrep}{{7}{8}}
+\@writefile{lot}{\contentsline {table}{\numberline {XII}{\ignorespaces Summary of the normalized data used to produce a speedup for {\tt  bzip2}}}{8}}
+\newlabel{tab:fullexp}{{XII}{8}}
 \citation{Curtsinger2013}
-\@writefile{lot}{\contentsline {table}{\numberline {XII}{\ignorespaces Summary of the normalized data used to produce a speedup for {\tt  bzip2}}}{9}}
-\newlabel{tab:fullexp}{{XII}{9}}
+\citation{ChowChanPLDI97}
+\citation{GuptaICCL98}
+\citation{BodikGuptaPLDI97}
+\citation{ChekuriMICRO96}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The $20$ different settings for {\tt  gzip}\ of the same setup}}{9}}
 \newlabel{fig:gzipfdll}{{8}{9}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-A}2}Analysis of {\tt  gcc}}{9}}
@@ -84,10 +90,8 @@
 \newlabel{tab:fullspeedup}{{XIII}{9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The $20$ different settings for {\tt  gcc}\ of the same setup}}{9}}
 \newlabel{fig:gccall}{{9}{9}}
-\citation{ChowChanPLDI97}
-\citation{GuptaICCL98}
-\citation{BodikGuptaPLDI97}
-\citation{ChekuriMICRO96}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Combined Profiling Methodology}{9}}
+\newlabel{sec:cmbprof}{{VI}{9}}
 \citation{BerubePhD}
 \citation{BerubeISPASS12}
 \citation{BerubeICPE11}
@@ -97,12 +101,12 @@
 \citation{BerubePhD}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces The actual result for {\tt  gcc}\ returned by our {\leavevmode {\color  {RoyalBlue}CP}}\ framework}}{10}}
 \newlabel{fig:gcc-results}{{10}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Combined Profiling Methodology}{10}}
-\newlabel{sec:cmbprof}{{VI}{10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}Hierarchical Normalization}{10}}
 \newlabel{cp:hn}{{\unhbox \voidb@x \hbox {VI-A}}{10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}}Denormalization}{10}}
 \newlabel{cp:denorm}{{\unhbox \voidb@x \hbox {VI-B}}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-C}}Queries}{10}}
+\newlabel{cp:queries}{{\unhbox \voidb@x \hbox {VI-C}}{10}}
 \citation{BerubePhD}
 \citation{Kalibera2013}
 \citation{Mytkowicz2009}
@@ -112,14 +116,12 @@
 \citation{Arnold00}
 \citation{ArnoldOOPSLA05}
 \citation{SalverdaCGO08}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-C}}Queries}{11}}
-\newlabel{cp:queries}{{\unhbox \voidb@x \hbox {VI-C}}{11}}
+\citation{SavariYoungJIPL00}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-D}}Alternative Usage}{11}}
 \newlabel{cp:extend}{{\unhbox \voidb@x \hbox {VI-D}}{11}}
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Related Work}{11}}
 \newlabel{sec:related}{{VII}{11}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-A}}{\leavevmode {\color  {Magenta}FDO}}-related}{11}}
-\citation{SavariYoungJIPL00}
 \bibstyle{IEEEtran}
 \bibdata{local}
 \bibcite{BerubePhD}{1}
@@ -135,10 +137,10 @@
 \bibcite{Mytkowicz2009}{11}
 \bibcite{Georges2007}{12}
 \bibcite{Arnold00}{13}
+\bibcite{ArnoldOOPSLA05}{14}
+\bibcite{SalverdaCGO08}{15}
+\bibcite{SavariYoungJIPL00}{16}
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{12}}
 \newlabel{sec:conclusion}{{VIII}{12}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VIII-A}}Future work}{12}}
 \@writefile{toc}{\contentsline {section}{References}{12}}
-\bibcite{ArnoldOOPSLA05}{14}
-\bibcite{SalverdaCGO08}{15}
-\bibcite{SavariYoungJIPL00}{16}
