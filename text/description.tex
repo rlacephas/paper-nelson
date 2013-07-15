@@ -15,7 +15,7 @@ The experiments were conducted on $20$ Dell Optiplex 755 running Slackware Linux
 
 For the case study with the SPEC CPU 2006  \gcc, each program is evaluated using a 15-input workload. The eleven inputs distributed with SPEC CPU 2006 are augmented with  four SPEC 2000 benchmark programs used as input: \bzip, \lbm, \mcf, and \parser. These benchmark programs had to be converted to the single pre-processed file format required by the \gcc benchmark. 
 
-\subsection {Case Study 1: \bzip\  and \gzip}
+\subsection {Case Study 2: \bzip\  and \gzip}
 
 For the case studies with \bzip\ and \gzip, the code used is not the one distributed by SPEC, but rather fully-functional versions of these programs. Using these versions eliminates the unrealistically-simplified profiling situation where mutually-exclusive use cases are combined into a single program run. Consequently, these programs cannot do decompression and compression, or multiple levels of compression, within the same run.  These distinct use-cases must be covered by different inputs in the program workload.
 
