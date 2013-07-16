@@ -1,7 +1,7 @@
 
-As mentioned in \refSection{sec:intro} a case study was proposed to study the inlining transformation. The experiment was designed to make a clear point about applying single-run methodologies and also about the definition of the input-set. Our experiment compared the \CP\ process with the single-run process. Any other transformation could have been chosen, because the \CP\ methodology can be applied in all general cases.
+As mentioned in \refSection{sec:intro} a case study was proposed for the inlining transformation. The experiment was designed to make a clear point about applying single-run methodologies and also about the definition of the input-set. The experiments compared the \CP\ process with the single-run process. Any other transformation could have been chosen, because the \CP\ methodology can be applied in all general cases.
 
-In \refSection{sec:speedup} it was shown an erroneous speedup, considering that it was measured by a single-run experiment. It was constructed considering that any of the measurements that ran independently could have happened in a single-run experiment. Hence searching the collected data it was not hard to find some outliers, or at least some data at extreme points. So, gathering these data points and defining two specific cases: \name{Best-runtime} and \name{Worst-runtime} for our \FDO-based inliner, and for a static inliner, in this case the \llvm\ inliner.
+In \refSection{sec:speedup} it was shown an erroneous speedup, considering that it was measured by a single-run experiment. The speedup was constructed considering that any of the measurements that ran independently could have happened in a single-run experiment. Hence, searching the collected data for some outliers, or at least some data at extreme points was not a hard task. So, gathering these data points and defining two specific cases: \name{Best-runtime} and \name{Worst-runtime} for the \FDO-based inliner, and for the \llvm\ inliner.
 
 With these data points just selecting the ideal pairs it is possible to create the illusion of a speedup and a slowdown:
 \begin{itemize}
@@ -9,15 +9,15 @@ With these data points just selecting the ideal pairs it is possible to create t
  \item \name{Worst-runtime} for \FDO\ and \name{Best-runtime} for \llvm, creating a slowdown.
 \end{itemize}
 
-With these pairs and assuming a single-run methodology, it was not hard to produce a statistical analysis showing a speedup (or slowdown), and, it is worth to state again, for this experiment these pairs of data can be devised as being representative cases of single-run experiments. Therefore, each pair (speedup or slowdown) can be viewed as a result of a single-run experiment. Even if the researcher is extremely cautious the methodology is error-prone, a bias can be introduced without the knowledge, or intention, of the researcher. So the real message is to define and use a reliable methodology based on solid statistical measurements.
+With these pairs and assuming a single-run methodology, a statistical analysis showing a speedup (or slowdown) was produced for \bzip, \gzip, \gobmk, and \gcc. Therefore, each pair (speedup or slowdown) can be viewed as a result of a single-run experiment. Even if the researcher is extremely cautious the methodology is error-prone, a bias can be introduced without the knowledge, or intention, of the researcher. So the real message is to define and use a reliable methodology based on solid statistical measurements.
 
-With our experiments some of the open questions posed in the \refSection{sec:intro} can be answered. We know for sure, and showed it in \refSection{sec:robust}, that \FDI\ decisions can be more accurate using \CP\ instead of single-run evaluation. For the case of the impact of \CP\ in a controlled case study, we can definitely state that as each program was run more than once, that's the price to pay for more reliability, but the impact is acceptable if the number of repetitions is not too high. In our experiments running three times was enough.
+With these experiments some of the open questions posed in the \refSection{sec:intro} can be answered. It is surely known, and was shown in \refSection{sec:robust}, that \FDI\ decisions can be more accurate using \CP\ instead of single-run evaluation. For the case of the impact of \CP\ in a controlled case study, that \CP\ is more reliable and its results are meaningful. Notwithstanding each program has to be run more than once, that is a small price to pay for more reliability, and the impact is acceptable if the number of repetitions is not too high. In the experiments carried out in this research running three times was enough.
 
 \subsection{Future work}
 
-For future work our plans can be divided in two different paths:
+There are two different paths for future work planning:
 \begin{itemize}
-\item {\it Fine-tuning} Using the \CP\ methodology fine tune our \FDI\ inliner for some different benchmarks. We have already finished some experiments and now we are defining some changes in our algorithms;
+\item {\it Fine-tuning} Using the \CP\ methodology fine tune the \FDI\ inliner for some different benchmarks. Some experiments have already finished, and some changes in the algorithms are being introduced.;
 
 \item {\it Apply \CP}  Applying \CP\ to different compiler transformations is another research path.
 

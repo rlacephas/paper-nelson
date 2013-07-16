@@ -17,7 +17,7 @@ Kalibera and Jones state that the majority of the experimental studies lack a ri
   \label{fig:gauss}
 \end{figure}
 
-After running three independent experiments, the first is the $10$-times experiment, then $100$-times and, after that, $1000$-times, there can be found evidence to discard the outliers. They can be discarded because this experiment confirmed that there is no difference on their means, and also that the behavior of the program remained unchanged in these three experiments. To make sure that they are robust measures, some simple statistics were run, to know the mean, the median, the standard-deviation from the mean (std-mean), and the standard-deviation from the median (std-median). The simple statistical results are shown in \refTable{tab:robustTest}. Also the results of the t-tests that were run on each sample pairs to verify if their means were the same, are shown in \refTable{tab:ttest}.
+From three independent experiments, the first one running $10$-times, after that running $100$-times, and then, the last one running $1000$-times, there is enough information to discard the outliers. They can be discarded as this experiment confirms, because there is no difference on their means, and also the behavior of the program remained unchanged. To make sure that these are robust measures, some simple statistics were run, finding the mean, the median, the standard-deviation from the mean (std-mean), and the standard-deviation from the median (std-median). The simple statistical results are shown in \refTable{tab:robustTest}. Also t-tests were run on each sample pairs to verify if their means were the same, the results are shown in \refTable{tab:ttest}.
 
 \begin{table}
   \centering
@@ -28,7 +28,7 @@ After running three independent experiments, the first is the $10$-times experim
   \label{tab:robustTest}
 \end{table}
 
-The t-tests in \refTable{tab:ttest} show that the null hypothesis cannot be discarded, as the value $0$ in each line of the \emph{t-test} column confirms. The \emph{p-values} illustrate the confidence in the hypothesis, in this case, that the means are different are not high.
+The t-tests in \refTable{tab:ttest} demonstrates that the null hypothesis cannot be discarded, as the value $0$ in each line of the \emph{t-test} column confirms, which means that the three means are similar. The \emph{p-values} show the confidence in the hypothesis, in this case that the means are different. As the values are not high, the confidence is very low.
 
 \begin{table}
   \centering
@@ -39,9 +39,10 @@ The t-tests in \refTable{tab:ttest} show that the null hypothesis cannot be disc
   \label{tab:ttest}
 \end{table}
 
-Our experiments have also shown that the variance when running the same data just three times in a row is not quite different from the one running $100$ times. When it is considered that each `input-run' is a $3$-consecutive run -- which means that the experiment ran $300$ times the same experiment --. For this experiment a `full-run' is considered to be a $3$-consecutive run for each input. This experiment ran $100$ `full-runs' in this experiment, and also some extra noise was injected by its end.
+Another experiment has also shown that the variance when running the same data just three times in a row is not quite different from the one running $100$ times. This experiment was constructed by exercising each `input-run' $3$ times, $3$-consecutive runs for each input, and the whole experiment was run $100$ times% -- which means that the experiment ran $300$ times each input.
+A `full-run' in this experiment is a $3$-consecutive run for each input, hence the experiment ran $100$ `full-runs'. Nevertheless the behavior of the system was stressed through the addition of extra noise, simulating an `uncontrolled variable' \cite{Kalibera2013}. The extra noise was injected by the end of the experiment.
 
-What this means is that even though the effect of the noise can mask the correct values, we can treat them in order to assure robustness. This is the way we employed to empirically verify the soundness of the \CP\ methodology. As \refFigure{fig:CProbust} below shows, the deviation from the mean is not large, but here is a subtle knob increasing the running time of the all programs in the experiment by its end. It was caused by the execution of another system at the same time competing for the same resources. In (\refFigure{CP:ebooks}) the running time for each program at each 3-consecutive run can be found in the $y$-axis, the number of the full-run is depicted on the $x$-axis. It can be also visualized in the histogram (\refFigure{CP:hist}). These figures show the $3$-consecutive run for the input data {\tt ebooks}, where in the $x$-axis we depicted the running time for the program and on the $y$-axis we depicted the number of runs at each bin.
+The purpose of the extra noise was to verify if the system was robust, even though the effect of the noise can mask the correct values, these data can treated assuring robustness. This way the \CP\ methodology was empirically verified with respect to soundness. As can be seen in \refFigure{fig:CProbust}, the deviation from the mean is not large, and also that there is a subtle knob, which increases the running time of the all programs. It was caused by the execution of another system at the same time competing for the same resources. The running time of each program at each 3-consecutive run can be found in the $y$-axis of \refFigure{CP:ebooks}, and the order number of each full-run is depicted on the $x$-axis. The extra noise can also be visualized in the histogram of \refFigure{CP:hist}, where the $x$-axis depicts the running time for the program and the $y$-axis depicts the number of runs at each bin. These two figures show the $3$-consecutive run for the input data {\tt ebooks}.
 
 \begin{figure}
   \centering
@@ -68,10 +69,9 @@ What this means is that even though the effect of the noise can mask the correct
   \label{fig:CProbust}
 \end{figure}
 
-The figures \refFigure{fig:CProbust} and \refFigure{fig:gauss} show that collecting data from single execution can produce erroneous results, even using machines with no other running program, there can still be some noise due to operating system activities, interruptions, etc. And also that a simple inclusion of a simple job during the running cycle can perturb the execution time, as can be observed by the knob in \refFigure{fig:CProbust}.
+\refFigure{fig:CProbust} and \refFigure{fig:gauss} show that collecting data from single execution can produce erroneous results, even using machines with no other running program. This happens because of the very nature of the empirical experiments, there is some noisy data distribution caused by regular operating system activities, interruption calls, etc. Also, an inclusion of a simple task during the running cycle can perturb the execution time of the program under evaluation, as can be observed by the knob in \refFigure{fig:CProbust}.
 
-The robustness is achieved only if we can statistically assure that the variance on the data is not large.
-The data used in the experiment are shown in \refTable{tab:simStats}, and the deviations from the mean (and median) to each $3$-consecutive run are summarized as the average, minimum, and maximum values, all found on the $300$-times experiment.
+The data collected in the experiment are shown in \refTable{tab:simStats}, and the deviations from the mean (and median) to each $3$-consecutive run are summarized as the average, minimum, and maximum values.
 
 \begin{table}
   \centering
@@ -82,7 +82,8 @@ The data used in the experiment are shown in \refTable{tab:simStats}, and the de
   \label{tab:simStats}
 \end{table}
 
-To confirm that the means are statistically representing the same distribution the t-tests were also run. This is summarized in \refTable{tab:statTest} below. It is easy to see very that there are little amount of outliers, except for the knob region, because the runtime was being raised during certain amount of time pushing a gradient to increase the time values, and after it, what happened was the other way around, decreasing the time values. Both tables \refTable{tab:simStats} and \refTable{tab:statTest} are shown for the runs.
+To confirm that the means are statistically representing the same distribution the t-tests were also run. This is summarized in \refTable{tab:statTest} below. It is easy to see that the number of outliers is little, except for the knob region. 
+%because the runtime was being raised during certain amount of time pushing a gradient to increase the time values, and after it, what happened was the other way around, decreasing the time values. Both tables \refTable{tab:simStats} and \refTable{tab:statTest} are shown for the runs.
 
 \begin{table}
   \centering
@@ -93,17 +94,21 @@ To confirm that the means are statistically representing the same distribution t
   \label{tab:statTest}
 \end{table}
 
-This kind of experiment can bring confidence in the data collected. In our case it brought confidence in the machine learning method devised to tune-in the inlining parameters of the compiler. One possibility considered was to increase the number of times each individual run needed to be performed in order to achieve low variance in the data; hence we could trust the results. As this experiment has shown, the $3$-consecutive run is a good choice, because it does not penalize much the total running time. Also, was shown that single-run testbeds are error-prone because they doesn't take the variance in the data into account.
+%This kind of experiment can bring confidence in the data collected. In our case it brought confidence in the machine learning method devised to tune-in the inlining parameters of the compiler. 
+To obtain low variance one possibility is to increase the number of consecutive runs for each individual input. Nevertheless, these experiments have shown that $3$-consecutive run is a good choice, because it does not penalize much the total running time of the system.
+
+The experiments also have shown that single-run testbeds are error-prone because they don't take the variance into account. The results of an experiment (speedups, or slowdowns) are robust only if there is statistical assurance that the variance on the data is not large.
+
 
 \subsection{Analyzing the speedup results}
 
-As aforementioned, each program is evaluated using a 15-input workload, and the inputs are described in \refSection{sec:speedup}. One way to generate the speedups is to select the best runtime values for the programs when inlined by \FDI\ and the worst runtime values for \llvm, generating a speedup. In the opposite way, selecting the worst runtime values for \FDI\ and best runtime values for \llvm\ generates a slowdown. Our experiment collected $3$ running times for each program at each input, hence it was just a matter of choosing least and greatest values.
+As aforementioned, the actual experiments collected $3$ different run-times for each program at each input, hence it was just a matter of choosing least and greatest values to exhibit a speedup or a slowdown. In a single-run methodology any combination would be plausible to occur.
 
-The complete and correct values are described below, and the compress/decompress programs were put together, but \gcc\ was analyzed separately. This section end with a figure that was generated by our framework, where the error bars are clearly depicted in it, showing that the speedup geometric means have a variance attached.
+The complete and correct values are described below. This section end with a figure that was generated by our framework, where the error bars are clearly depicted in it, showing the variance on the speedup geometric means.
 
-\subsubsection{Compressor / Decompressor}
+\subsubsection{Analysis of\ \ \bzip\  and  \gzip}
 
-After analyzing the inlining environment and having the confidence that the results are trustful, the first program to run the experiments was \bzip. Collecting data from the same setup (hardware and software) in $18$ different settings was the first step. \refFigure{fig:fdllrep} shows the data collected. The vertical axis shows the normalized execution geometric mean time for each setting, the baseline is Never (no inlining), and the horizontal axis shows the settings organized by number. The red ``*" represent the normalized geomean time of the \FDI\ inlined program, and the blue ``o" represent the normalized geomean for \llvm\ inlined program.
+After analyzing the inlining environment and having the confidence that the results are trustful, the first program studied was \bzip. Collecting data from the same setup (hardware and software) in $18$ different settings was the first step. \refFigure{fig:fdllrep} shows the data collected. The vertical axis shows the normalized execution geometric mean time for each setting, the baseline is Never (no inlining), and the horizontal axis shows the settings organized by number. The red ``*" represent the normalized geomean time of the \FDI\ inlined program, and the blue ``o" represent the normalized geomean for \llvm\ inlined program.
 
 \begin{figure}
   \centering
@@ -114,9 +119,9 @@ After analyzing the inlining environment and having the confidence that the resu
 
 The blue lines in the figure show each median value for the geometric means, the green lines represent one standard deviation from the median for the \FDI\ case, while the black lines represent the standard deviation from the median for the \llvm\ case. As it can be seen, not only the values are too similar, varying only from the fourth decimal digit, but also the medians and their standard deviations overlap, collapse. This is a strong indicator that there is no significant difference between those measures.
 
-So, to accomplish the task, just consider that a single-run experiment could have measured any one of the $3$-consecutive run values individually, moreover, a single run may have also collected the best, or the worst values for the actual times of the experiment. Hence, to outcome a speedup for \FDI\, collected the worst running time for \llvm\ inlined program, and the best running time for the \FDI\ inlined program.
+Now just consider that a single-run experiment could have measured any one of the $3$-consecutive run values individually, moreover, a single run may have also collected the best, or the worst values for the actual times of the experiment. Hence, to outcome a speedup for \FDI\, the experiment could have collected the worst running time for \llvm\ inlined program, and the best running time for the \FDI\ inlined program.
 
-Even though this biased data showed a speedup, it was really worthless, only $0.46 \%$. Therefore, to reinforce that the input set is also a big issue, the data were "adjusted", leaving the slowdowns and some of the tiny speedups gathered from the list of inputs off the final list to be shown. This way a tiny, but possibly measurable speedup, was presented in \refSection{sec:speedup}. Nevertheless, define a list of inputs is an issue and has to be treated as part of the experiment design, as this ``speedup'' have shown. That is why a complete list of inputs containing all the explanations is a requirement when presenting data as well. The full data for the "speedup" experiment are shown in table \refTable{tab:fullexp}.
+Even though this biased data showed a speedup, it was really worthless, only $0.46 \%$. Therefore, to reinforce that the input set is also a big issue, the data were "adjusted", leaving the slowdowns and some of the tiny speedups gathered from the set of inputs out of the final list to be shown. This way a tiny, but possibly measurable speedup, was presented in \refSection{sec:speedup}. Nevertheless, defining a list of inputs is an issue and has to be treated as part of the experiment design, as this ``speedup'' have shown. The full data for the "speedup" experiment are shown in table \refTable{tab:fullexp}.
 
 \begin{table}
   \centering
@@ -129,7 +134,7 @@ Even though this biased data showed a speedup, it was really worthless, only $0.
 
 On the other hand, in \refSection{sec:slowdown} the opposite was performed, choosing the worst individual running time for the \FDI\ inlined program and the best running time for the \llvm\ inlined program. Proceeding this way it was easy to present, from "a different" individual measuring, a slowdown. And as both results followed the same methodology, they are both correct, and this is unexplainable unless considering that there is variance on the data collected.
 
-The same process was employed for the \gzip\ case, using $20$ different settings, the \refFigure{fig:gzipfdll} shows the data collected in a similar way of what was presented in \refFigure{fig:fdllrep}. In \refFigure{fig:gzipfdll} we can notice that there is possibly a slowdown compared to \llvm\ for this setup, and even though it was not hard to report a speedup.
+The same process was employed for the \gzip\ case, using $20$ different settings. \refFigure{fig:gzipfdll} presents the \gzip\ data in the same way of \refFigure{fig:fdllrep}. From \refFigure{fig:gzipfdll} there can be seen no evidence of speedup for this setup, and even though a speedup was reported.
 
 \begin{figure}
   \centering
@@ -138,15 +143,37 @@ The same process was employed for the \gzip\ case, using $20$ different settings
   \label{fig:gzipfdll}
 \end{figure}
 
-These cases were artificially constructed using our empirical actual data, considering that if we used a single-run methodology these results could appear. But using \CP\ methodology, the researcher is able to correctly identify that there is no statistical difference between both inliners, for the setup proposed. This result, in a certain way, reinforces the result of ~\cite{Curtsinger2013}, where they reported no speedup of $-O2$ over $-O3$ for all benchmarks they analyzed, when code randomization is applied.
+Although these cases were artificially constructed from empirical data, if a single-run methodology was employed these results could appear. But employing \CP\ methodology allows a researcher to correctly identify the statistical variance on the data and to discard speedups or slowdowns. This result, in a certain way, reinforces the result of Curtsinger and Berger, reporting no speedup of $-O2$ over $-O3$ for all benchmarks they analyzed, when code randomization is applied~\cite{Curtsinger2013}.
+
+%=============== GOBMK
+
+\subsubsection{Analysis of \gobmk}
+
+For \gobmk\ the input set was chosen in a similar way to that for \bzip\ and \gzip\ cases. But, in reality the full 15-input set was applied, and if the full input-set is taken, the experiment would have produced a different result, the speedup would be of $1.01 \%$, as shown in \refTable{tab:fullspeedupgbk} and in \refFigure{fig:gobmkall}.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/fullspeedupgbk}
+  \end{tiny}
+  \caption{Summary of the normalized data used to produce a speedup for \gcc}
+  \label{tab:fullspeedupgbk}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgbkall}
+  \caption{The complete data of the speedup for \gobmk}
+  \label{fig:gobmkall}
+\end{figure}
 
 %=============== GCC
 
 \subsubsection{Analysis of \gcc}
 
-The same process was used for the \gcc\ case, the best running times for \FDI\ inlined program in the setting were selected, and the worst running times for \llvm\ inlined programs were also selected. These data were select for each input, and from this our speedup experiment was constructed. In a single-run framework it is perfectly reasonable that this result can actually appear. But in this case we came up with a result considering a somewhat reduced input set, which produced an even better speedup. Again, this was done to raise the question about the proper set of inputs to be employed. In fact, the set presented in \refSection{sec:speedup} was already an extract from the SPEC CPU 2006 benchmark suite.
+For \gcc\ there were two different outcomes, one with the input set chosen, similar to the \bzip, \gzip, and \gobmk\ cases, and another one with a somewhat even more reduced input set, which produced an even better speedup. Again, this was done to raise the question about the proper set of inputs to be employed.
 
-In reality the full SPEC CPU 2006 benchmark suite was applied, and 4 more inputs, which were converted from the SPEC 2000 benchmark, were added fulfilling the 15-input set to each program, as described in \refSection{sec:description}. If the full input-set is taken, the experiment would have produced a different result, the speedup in the case of the best run-times, would be of $2.52 \%$, as shown in \refTable{tab:fullspeedup} and in \refFigure{fig:gccall}.
+In reality the full 15-input set was applied, and if the full input-set is taken, the experiment would have produced a different result, the speedup would be of $2.52 \%$, as shown in \refTable{tab:fullspeedup} and in \refFigure{fig:gccall}.
 
 \begin{table}
   \centering
@@ -160,13 +187,13 @@ In reality the full SPEC CPU 2006 benchmark suite was applied, and 4 more inputs
 \begin{figure}
   \centering
   \includegraphics[width=1.00\linewidth]{Figures/speedupgccall}
-  \caption{The $20$ different settings for \gcc\ of the same setup}
+  \caption{The complete data of the speedup for \gcc}
   \label{fig:gccall}
 \end{figure}
 
-Therefore, the input-set matters, as much as a sound methodology. To summarize this section and illustrate the outcomes of our framework, employing \CP\ methodology \refFigure{fig:gcc-results} presents one of the figures automatically generated by the framework. In this figure it can be observed that there was no speedups, nor slowdowns for the \gcc\ case, the error bars present in \refFigure{fig:gcc-results} demonstrates the level of confidence in the geometric mean results.
+Therefore, the input-set matters, as much as a sound methodology. To summarize this section and illustrate the outcomes of the framework employing \CP\ methodology, \refFigure{fig:gcc-results} presents one of the figures automatically generated by the framework. In this figure it can be observed that there was no speedups, nor slowdowns for the \gcc\ case, the error bars present in \refFigure{fig:gcc-results} demonstrates the level of confidence in the geometric mean results.
 
-As already mentioned, this figure was automatically generated by our system, and reflects the geometric mean of all inputs for twelve different \FDI\ inliners, the \llvm\ inliner (called static in the figure) and another static inliner called benefit.
+This figure reflects the geometric mean of all inputs for one single-run \FDI\ inliner (called single in the figure), twelve different \FDI\ inliners, the \llvm\ inliner (called static in the figure) and another static inliner called benefit.
 
 \begin{figure}
   \centering

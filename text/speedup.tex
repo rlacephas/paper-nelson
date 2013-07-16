@@ -88,7 +88,7 @@ For the \gcc\ benchmark the results show a speedup of $3.70 \%$ over \llvm\, and
   \label{tab:speedupgcc}
 \end{table}
 
-The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains the speedup.\rr{The speedup figures for \gcc\ are outdated, but the tables are correct}
+The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains the speedup.
 
 \begin{figure}
   \centering
@@ -159,6 +159,29 @@ The experiment with \gzip\ was a starting point to test the conjecture, and the 
 
 The results of the experiment are also consistent with other similar findings in the literature, whereas employing single-run experiments does not generate any kind of disturbance in the analysis, and the speedup result are statistically sound. So we can confirm a speedup over the static inliner for the \bzip\ and \gzip\ cases.
 
+\subsubsection{Case Study 3 \gobmk}
+
+For the \gobmk\ benchmark the results show a speedup of $1.53 \%$ over \llvm\, and a $1.32 \%$ speedup over Never, whereas \llvm\ had a $0.21 \%$ slowdown over Never, for the short input set used. This result is summarized in \refTable{tab:speedupgobmk}. The results are normalized by the baseline Never (no inlining).
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/speedupgbk}
+  \end{tiny}
+  \caption{Summary of the data collected during the experiment with \gobmk}
+  \label{tab:speedupgobmk}
+\end{table}
+
+The \refFigure{fig:speedupgobmk} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains the speedup.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgbk}
+  \caption{Running times of the \gobmk\ inlined versions, normalized by Never}
+  \label{fig:speedupgobmk}
+\end{figure}
+
+
 \subsection{Presenting the slowdown results}
 \label{sec:slowdown}
 
@@ -204,4 +227,17 @@ The slowdown over \llvm\ measured is of $2.14 \%$ for \bzip, $5.87 \%$ for \gzip
   \end{tiny}
   \caption{Data reflecting a slowdown on \gzip}
   \label{tab:slowdownz}
+\end{table}
+
+\subsubsection{Case Study 3: \gobmk}
+
+The slowdown over \llvm\ measured is of $0.89 \%$ for \gobmk, as shown in \refTable{tab:slowdowngobmk}.
+
+\begin{table}
+  \centering
+  \begin{tiny}
+  \input{Tables/slowdowngbk}
+  \end{tiny}
+  \caption{Data reflecting a slowdown on \gobmk}
+  \label{tab:slowdowngobmk}
 \end{table}

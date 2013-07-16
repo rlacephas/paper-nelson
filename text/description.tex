@@ -63,6 +63,10 @@ The decompression set for each compressor uses the same base set of files, pre-c
 \end{itemize}
 }
 
+\subsection {Case Study 3: \gobmk}
+
+For the case study with the SPEC CPU 2006 \gobmk, SPEC provides 20 inputs.  However, only 5 of these inputs come from the {\tt ref} workload; the {\tt train} workload contains 8 inputs, and the {\tt test} workload contains 7 inputs.  Many of the inputs from {\tt test} and {\tt train} have very short execution times: 4 inputs take less than 1 second, 6 take 2--9 seconds, 4 take 12--19 seconds, and 1 takes longer than 1 minute.  Execution times of less than a few seconds are subject to large proportional timing imprecision, because the Linux {\tt time} command reports times with a resolution of 1/100$^{th}$ of a second.  Therefore, the 15 longest-running inputs are chosen for \Wfull.  This set is composed of the {\tt ref} and {\tt train} SPEC workloads, plus \iname{connect} and \iname{dniwog} from {\tt test}.
+
 %======== The inlining parameters
 
 \REM{
