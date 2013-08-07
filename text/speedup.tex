@@ -70,7 +70,7 @@ The experiments were run on $20$ Dell Optiplex 755, whose characteristics are:
 
 %============ Our results
 
-In the figures throughout this section, all results are presented in a bar graph where the values used for each of the columns are calculated using the actual running times divided by the actual running time of Never, normalizing the results presented. Whenever the values are less than one, then these particular programs have a better (faster) performance than the same program without inlining. Also, the speedup column in the tables shown in this section is calculated as the ratio between \FDI\ and \llvm, hence, whenever the values are less than one then there is a speedup, otherwise a slowdown.
+In the figures throughout this section, all results are presented in a bar graph where the values used for each of the columns are calculated using the actual running times divided by the actual running time of Never, normalizing the results presented. Whenever the values are less than one, then these particular programs have a better (faster) performance than the same program without inlining. Also, the speedup columns in the tables shown in this section are calculated from the ratio between \FDI\ and \llvm.%, hence, whenever the values are less than one then there is a speedup, otherwise a slowdown.
 
 \subsection{Presenting the speedup results}
 \label{sec:speedupresult}
@@ -79,7 +79,7 @@ As aforementioned the data points were selected as representing a single-run met
 
 \subsubsection{Case Study 1 \gcc}
 
-For the \gcc\ benchmark the results show a speedup of $3.70 \%$ over \llvm\, and a $3.92 \%$ speedup over Never, whereas \llvm\ achieved a $0.23 \%$ speedup over Never, for the short input set used. This result is summarized in \refTable{tab:speedupgcc} below. The results are normalized by the baseline Never (no inlining).
+For the \gcc\ benchmark the results show a speedup of $2.52 \%$ over \llvm\, and a $3.17 \%$ speedup over Never, whereas \llvm\ achieved a $0.67 \%$ speedup over Never, for the whole input set. This result is summarized in \refTable{tab:speedupgcc} below. The results are normalized by the baseline Never (no inlining).
 
 \begin{table}
   \centering
@@ -94,12 +94,12 @@ The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never an
 
 \begin{figure}
   \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedupgcc}
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgccall}
   \caption{Running times of the \gcc\ inlined versions, normalized by Never}
   \label{fig:speedupgcc}
 \end{figure}
 
-Nevertheless, this result can be improved by just selecting less inputs from the short input set applied without changing the set substantially. In this case the speedup reported is $4.56 \%$ over \llvm, as shown in \refTable{tab:speedupgcc1} and \refFigure{fig:speedupgcc1}.
+\REM{Nevertheless, this result can be improved by just selecting less inputs from the short input set applied without changing the set substantially. In this case the speedup reported is $4.56 \%$ over \llvm, as shown in \refTable{tab:speedupgcc1} and \refFigure{fig:speedupgcc1}.
 
 \begin{table}
   \centering
@@ -116,10 +116,10 @@ Nevertheless, this result can be improved by just selecting less inputs from the
   \caption{Extract of the running times of the \gcc\ inlined versions, normalized by Never}
   \label{fig:speedupgcc1}
 \end{figure}
-
+}
 \subsubsection{Case Study 2: \bzip\  and \gzip}
 
-For the \bzip\ and \gzip\ cases, the experiments showed a slight speedup over \llvm. The data collected from the \bzip\ runs are summarized in \refTable{tab:speedupb}. In this table the speedup achieved was a slight one, $1.36 \%$ over \llvm\ results, and $1.40 \%$ over Never (no inlining), whereas \llvm\ achieved a speedup of $0.04 \%$ over Never.
+For the \bzip\ and \gzip\ cases, the experiments showed a slight speedup over \llvm. The data collected from the \bzip\ runs are summarized in \refTable{tab:speedupb}. In this table the speedup achieved was a slight one, $0.46 \%$ over \llvm\ results, and $0.71 \%$ over Never (no inlining), whereas \llvm\ achieved a speedup of $0.25 \%$ over Never.
 
 \begin{table}
   \centering
@@ -134,14 +134,14 @@ For the \bzip\ and \gzip\ cases, the experiments showed a slight speedup over \l
 
 \begin{figure}
   \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedupb}
+  \includegraphics[width=1.00\linewidth]{Figures/speedupbzipall}
   \caption{Running times of the \bzip\ inlined versions, normalized by Never}
   \label{fig:speedup}
 \end{figure}
 
-The final speedup, despite being a slight improvement, represents that the \FDI\ inliner can actually be employed instead of the \llvm\ inliner. And this result is significant because the program \bzip\ is small, simple, and not particularly fitted to inlining, leading to a conjecture that \FDI\ inliner are better than static ones. Which opens a wide range of experiments with other programs to confirm this conjecture.
+The final result for the speedup, despite being a slight improvement, represents that the \FDI\ inliner can actually be employed instead of the \llvm\ inliner. And this result is also significant because the program \bzip\ is small, simple, and not particularly fitted to inlining, leading to a conjecture that \FDI\ inliner are better than static ones. Which opens a wide range of experiments with other programs to confirm this conjecture.
 
-The experiment with \gzip\ was a starting point to test the conjecture, and the results are quite similar to those from \bzip, and confirmed a speedup of $2.09 \%$ over \llvm\ results, and a speedup of $1.50 \%$ over Never (no inlining) and \llvm\ got a slowdown of $0.61 \%$ over Never. These results can be seen in \refTable{tab:speedupz}, where the times are already normalized by the baseline Never (no inlining). \refFigure{fig:speedupz} shows the normalized running time for \gzip, and it also outperforms Never and \llvm\ through all inputs.
+The experiment with \gzip\ was a starting point to test the conjecture, and the results are quite similar to those from \bzip, and confirmed a speedup of $2.26 \%$ over \llvm\ results, and a speedup of $2.90 \%$ over Never (no inlining) and \llvm\ got a speedup of $0.66 \%$ over Never. These results can be seen in \refTable{tab:speedupz}, where the times are already normalized by the baseline Never (no inlining). \refFigure{fig:speedupz} shows the normalized running time for \gzip, and it also outperforms Never and \llvm\ through all inputs.
 
 \begin{table}
   \centering
@@ -154,7 +154,7 @@ The experiment with \gzip\ was a starting point to test the conjecture, and the 
 
 \begin{figure}
   \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedup}
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgzipall}
   \caption{Running times of the \gzip\ inlined versions, normalized by Never}
   \label{fig:speedupz}
 \end{figure}
@@ -163,7 +163,7 @@ The results of the experiment are also consistent with other similar findings in
 
 \subsubsection{Case Study 3 \gobmk}
 
-For the \gobmk\ benchmark the results show a speedup of $1.53 \%$ over \llvm\, and a $1.32 \%$ speedup over Never, whereas \llvm\ had a $0.21 \%$ slowdown over Never, for the short input set used. This result is summarized in \refTable{tab:speedupgobmk}. The results are normalized by the baseline Never (no inlining).
+For the \gobmk\ benchmark the results show a speedup of $1.01 \%$ over \llvm\, and a $0.99 \%$ speedup over Never, whereas \llvm\ had a $0.02 \%$ slowdown over Never, for the short input set used. This result is summarized in \refTable{tab:speedupgobmk}. The results are normalized by the baseline Never (no inlining).
 
 \begin{table}
   \centering
@@ -178,7 +178,7 @@ The \refFigure{fig:speedupgobmk} shows that the \FDI\ inliner outperforms Never 
 
 \begin{figure}
   \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedupgbk}
+  \includegraphics[width=1.00\linewidth]{Figures/speedupgbkall}
   \caption{Running times of the \gobmk\ inlined versions, normalized by Never}
   \label{fig:speedupgobmk}
 \end{figure}
@@ -191,7 +191,7 @@ Proceeding as described in \refSection{sec:description}, the data points for the
 
 \subsubsection{Case Study 1 \gcc}
 
-The slowdown over \llvm\ measured is of $2.06 \%$ for \gcc, as shown in \refTable{tab:slowdowngcc}. \refFigure{fig:slowdowngcc} shows the normalized running time for the slowdown measured for \gcc.
+The slowdown over \llvm\ measured is of $2.43 \%$ for \gcc, as shown in \refTable{tab:slowdowngcc}. \refFigure{fig:slowdowngcc} shows the normalized running time for the slowdown measured for \gcc.
 
 \begin{table}
   \centering
@@ -204,14 +204,14 @@ The slowdown over \llvm\ measured is of $2.06 \%$ for \gcc, as shown in \refTabl
 
 \begin{figure}
   \centering
-  \includegraphics[width=1.00\linewidth]{Figures/slowdowngcc}
+  \includegraphics[width=1.00\linewidth]{Figures/slowdowngccall}
   \caption{Running times of the slowdown measured for \gcc\ inlined versions, normalized by Never}
   \label{fig:slowdowngcc}
 \end{figure}
 
 \subsubsection{Case Study 2: \bzip\  and \gzip}
 
-The slowdown over \llvm\ measured is of $2.14 \%$ for \bzip, $5.87 \%$ for \gzip, as shown in \refTable{tab:slowdownb}, \refTable{tab:slowdownz}.
+The slowdown over \llvm\ measured is of $0.71 \%$ for \bzip, $8.84 \%$ for \gzip, as shown in \refTable{tab:slowdownb}, \refTable{tab:slowdownz}.
 
 \begin{table}
   \centering
@@ -233,7 +233,7 @@ The slowdown over \llvm\ measured is of $2.14 \%$ for \bzip, $5.87 \%$ for \gzip
 
 \subsubsection{Case Study 3: \gobmk}
 
-The slowdown over \llvm\ measured is of $0.89 \%$ for \gobmk, as shown in \refTable{tab:slowdowngobmk}.
+The slowdown over \llvm\ measured is of $0.99 \%$ for \gobmk, as shown in \refTable{tab:slowdowngobmk}.
 
 \begin{table}
   \centering
