@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.7.16)  7 AUG 2013 11:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  20 AUG 2013 22:38
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **rr-method.tex
@@ -92,7 +92,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 \c@IEEEbiography=\count90
 \@IEEEtranrubishbin=\box26
 )
-** ATTENTION: Overriding command lockouts (line 11).
+** ATTENTION: Overriding command lockouts (line 13).
 (/usr/local/texlive/2013/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -265,23 +265,29 @@ Package: epigraph 2009/09/02 v1.5c typesetting epigraphs
 \epigraphwidth=\skip64
 \epigraphrule=\skip65
 ))
-(./rr-method.aux)
+(./rr-method.aux
+
+LaTeX Warning: Label `fig:BestFDIWorstLLVMgcc' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:BestFDIWorstLLVMgcc' multiply defined.
+
+)
 \openout1 = `rr-method.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-
-(/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+ (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count111
 \scratchdimen=\dimen133
@@ -363,57 +369,62 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 2.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [2])
-(./text/description.tex [3]) (./text/speedup.tex (./Tables/speedup.tex)
+(./text/description.tex [3]
 <Figures/speedupgccall.pdf, id=19, 455.7025pt x 274.02374pt>
 File: Figures/speedupgccall.pdf Graphic file (type pdf)
 
 <use Figures/speedupgccall.pdf>
-Package pdftex.def Info: Figures/speedupgccall.pdf used on input line 97.
-(pdftex.def)             Requested size: 252.0pt x 151.53723pt.
- [4 <./Figures/speedupgccall.pdf>]
-(./Tables/speedupb.tex)
-<Figures/speedupbzipall.pdf, id=277, 434.62375pt x 261.97874pt>
-File: Figures/speedupbzipall.pdf Graphic file (type pdf)
+Package pdftex.def Info: Figures/speedupgccall.pdf used on input line 25.
+(pdftex.def)             Requested size: 206.39685pt x 124.11234pt.
 
-<use Figures/speedupbzipall.pdf>
-Package pdftex.def Info: Figures/speedupbzipall.pdf used on input line 137.
-(pdftex.def)             Requested size: 252.0pt x 151.8998pt.
- (./Tables/speedupz.tex)
-<Figures/speedupgzipall.pdf, id=278, 413.545pt x 248.93pt>
-File: Figures/speedupgzipall.pdf Graphic file (type pdf)
-
-<use Figures/speedupgzipall.pdf>
-Package pdftex.def Info: Figures/speedupgzipall.pdf used on input line 157.
-(pdftex.def)             Requested size: 252.0pt x 151.69133pt.
- (./Tables/speedupgbk.tex)
-<Figures/speedupgbkall.pdf, id=279, 437.635pt x 262.9825pt>
-File: Figures/speedupgbkall.pdf Graphic file (type pdf)
-
-<use Figures/speedupgbkall.pdf>
-Package pdftex.def Info: Figures/speedupgbkall.pdf used on input line 181.
-(pdftex.def)             Requested size: 252.0pt x 151.43044pt.
- [5 <./Figures/speedupbzipall.pdf> <./Figures/speedupgzipall.pdf>] (./Tables/sl
-owdown.tex)
-<Figures/slowdowngccall.pdf, id=784, 460.72125pt x 277.035pt>
+<Figures/slowdowngccall.pdf, id=20, 460.72125pt x 277.035pt>
 File: Figures/slowdowngccall.pdf Graphic file (type pdf)
 
 <use Figures/slowdowngccall.pdf>
-Package pdftex.def Info: Figures/slowdowngccall.pdf used on input line 207.
-(pdftex.def)             Requested size: 252.0pt x 151.5285pt.
- (./Tables/slowdownb.tex)
-(./Tables/slowdownz.tex) (./Tables/slowdowngbk.tex)) (./text/robust.tex
-[6 <./Figures/speedupgbkall.pdf> <./Figures/slowdowngccall.pdf>]
+Package pdftex.def Info: Figures/slowdowngccall.pdf used on input line 29.
+(pdftex.def)             Requested size: 206.39685pt x 124.1066pt.
+) (./text/speedup.tex (./Tables/speedup.tex)
+
+LaTeX Warning: Reference `fig:speedupgcc' on page 4 undefined on input line 93.
+
+
+[4] (./Tables/speedupb.tex)
+<Figures/speedupbzipall.pdf, id=28, 434.62375pt x 261.97874pt>
+File: Figures/speedupbzipall.pdf Graphic file (type pdf)
+
+<use Figures/speedupbzipall.pdf>
+Package pdftex.def Info: Figures/speedupbzipall.pdf used on input line 131.
+(pdftex.def)             Requested size: 252.0pt x 151.8998pt.
+ (./Tables/speedupz.tex)
+<Figures/speedupgzipall.pdf, id=29, 413.545pt x 248.93pt>
+File: Figures/speedupgzipall.pdf Graphic file (type pdf)
+
+<use Figures/speedupgzipall.pdf>
+Package pdftex.def Info: Figures/speedupgzipall.pdf used on input line 151.
+(pdftex.def)             Requested size: 252.0pt x 151.69133pt.
+ (./Tables/speedupgbk.tex) [5 <./Figures/speedupgccall.pdf> <./Figures/slowdown
+gccall.pdf> <./Figures/speedupbzipall.pdf>]
+<Figures/speedupgbkall.pdf, id=784, 437.635pt x 262.9825pt>
+File: Figures/speedupgbkall.pdf Graphic file (type pdf)
+
+<use Figures/speedupgbkall.pdf>
+Package pdftex.def Info: Figures/speedupgbkall.pdf used on input line 175.
+(pdftex.def)             Requested size: 252.0pt x 151.43044pt.
+
+
+LaTeX Warning: Reference `fig:slowdowngcc' on page 6 undefined on input line 18
+8.
+
+(./Tables/slowdown.tex) (./Tables/slowdownb.tex) (./Tables/slowdownz.tex)
+(./Tables/slowdowngbk.tex)) (./text/robust.tex [6 <./Figures/speedupgzipall.pdf
+> <./Figures/speedupgbkall.pdf>]
 <Figures/nt1000.pdf, id=1289, 1026.83624pt x 727.71875pt>
 File: Figures/nt1000.pdf Graphic file (type pdf)
 
 <use Figures/nt1000.pdf>
 Package pdftex.def Info: Figures/nt1000.pdf used on input line 15.
 (pdftex.def)             Requested size: 252.0pt x 178.5869pt.
-
-Underfull \vbox (badness 1077) has occurred while \output is active []
-
-
-(./Tables/robustTest.tex) (./Tables/tTest.tex)
+ (./Tables/robustTest.tex) (./Tables/tTest.tex)
 <Figures/ebooks300.pdf, id=1290, 1026.83624pt x 758.835pt>
 File: Figures/ebooks300.pdf Graphic file (type pdf)
 
@@ -442,15 +453,16 @@ File: Figures/gzipfdll.pdf Graphic file (type pdf)
 <use Figures/gzipfdll.pdf>
 Package pdftex.def Info: Figures/gzipfdll.pdf used on input line 141.
 (pdftex.def)             Requested size: 252.0pt x 194.72353pt.
- (./Tables/fullspeedupgbk.tex) [9 <./Figures/fdllrep.pdf>]
+ [9 <./Figures/fdllrep.pdf>]
+(./Tables/fullspeedupgbk.tex)
 File: Figures/speedupgbkall.pdf Graphic file (type pdf)
  <use Figures/speedupgbkall.pdf>
 Package pdftex.def Info: Figures/speedupgbkall.pdf used on input line 165.
 (pdftex.def)             Requested size: 252.0pt x 151.43044pt.
- (./Tables/fullspeedup.tex)
-File: Figures/speedupgccall.pdf Graphic file (type pdf)
 
-<use Figures/speedupgccall.pdf>
+(./Tables/fullspeedup.tex)
+File: Figures/speedupgccall.pdf Graphic file (type pdf)
+ <use Figures/speedupgccall.pdf>
 Package pdftex.def Info: Figures/speedupgccall.pdf used on input line 189.
 (pdftex.def)             Requested size: 252.0pt x 151.53723pt.
 
@@ -460,12 +472,9 @@ File: Figures/gcc-results.pdf Graphic file (type pdf)
 <use Figures/gcc-results.pdf>
 Package pdftex.def Info: Figures/gcc-results.pdf used on input line 200.
 (pdftex.def)             Requested size: 252.0pt x 189.00197pt.
-) (./text/cmbprof.tex [10 <./Figures/gzipfdll.pdf>]
-Underfull \vbox (badness 1728) has occurred while \output is active []
-
- [11 <./Figures/gcc-results.pdf>]) (./text/related.tex) [12] (./text/conclusion
-.tex)
-(./rr-method.bbl)
+) [10 <./Figures/gzipfdll.pdf>]
+(./text/cmbprof.tex [11 <./Figures/gcc-results.pdf>]) (./text/related.tex
+[12]) (./text/conclusion.tex) (./rr-method.bbl [13])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -477,33 +486,42 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[13] (./rr-method.aux) ) 
+[14
+
+] (./rr-method.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 4684 strings out of 493315
- 67299 string characters out of 6137904
- 172786 words of memory out of 5000000
- 7972 multiletter control sequences out of 15000+600000
- 49608 words of font info for 104 fonts, out of 8000000 for 9000
+ 4688 strings out of 493315
+ 67384 string characters out of 6137904
+ 172836 words of memory out of 5000000
+ 7975 multiletter control sequences out of 15000+600000
+ 50715 words of font info for 105 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,11n,24p,1450b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/bas
-e/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-7.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
-pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
-></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-/usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/20
-13/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-
-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts
-/type1/urw/times/utmri8a.pfb>
-Output written on rr-method.pdf (13 pages, 702129 bytes).
+ 38i,11n,24p,1437b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
+013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/201
+3/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2013/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2013/texmf-dis
+t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
+pe1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/t
+imes/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri
+8a.pfb>
+Output written on rr-method.pdf (14 pages, 703807 bytes).
 PDF statistics:
- 1390 PDF objects out of 1440 (max. 8388607)
- 829 compressed objects within 9 object streams
+ 1393 PDF objects out of 1440 (max. 8388607)
+ 831 compressed objects within 9 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

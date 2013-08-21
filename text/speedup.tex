@@ -92,12 +92,6 @@ For the \gcc\ benchmark the results show a speedup of $2.52 \%$ over \llvm\, and
 
 The \refFigure{fig:speedupgcc} shows that the \FDI\ inliner outperforms Never and \llvm\ through all the inputs, which explains the speedup.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=1.00\linewidth]{Figures/speedupgccall}
-  \caption{Running times of the \gcc\ inlined versions, normalized by Never}
-  \label{fig:speedupgcc}
-\end{figure}
 
 \REM{Nevertheless, this result can be improved by just selecting less inputs from the short input set applied without changing the set substantially. In this case the speedup reported is $4.56 \%$ over \llvm, as shown in \refTable{tab:speedupgcc1} and \refFigure{fig:speedupgcc1}.
 
@@ -202,12 +196,6 @@ The slowdown over \llvm\ measured is of $2.43 \%$ for \gcc, as shown in \refTabl
   \label{tab:slowdowngcc}
 \end{table}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=1.00\linewidth]{Figures/slowdowngccall}
-  \caption{Running times of the slowdown measured for \gcc\ inlined versions, normalized by Never}
-  \label{fig:slowdowngcc}
-\end{figure}
 
 \subsubsection{Case Study 2: \bzip\  and \gzip}
 
