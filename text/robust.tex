@@ -13,6 +13,8 @@ The inputs for compression include images, ebooks in a variety of formats, movie
 
 \jna{We must state what is the benchmark run to produced the scatter plot shown in Figure \refFigure{fig:gauss} and also what was the input used for those runs.}
 
+\jna{What is our rationalization for concluding that we should see the same pattern of execution for all experiments based on the results shown in Figure \refFigure{fig:gauss}? Have we also done this experiment for other benchmarks and are only showing the result for one? Or are we assuming that the results should generalize because the conditions for all experiments are the same?}
+
 \refFigure{fig:gauss} reveals a gaussian noise around the median plus some outliers that are the result of regular operating system activity. These outliers can safely be filtered out from the data set. They are easily discarded because they are more than one standard deviation above the median.
 
 \jna{Make fonts much bigger in \refFigure{fig:gauss}, also change "runs" to "run" in the horizontal axis because "runs" could be the number of runs represented by a point.} 
@@ -37,6 +39,8 @@ Simple statistics --- mean, median, standard-deviation from the mean (std-mean) 
   \caption{Simple statistics on the experiment}
   \label{tab:robustTest}
 \end{table}
+
+\jna{We need a clearer and more complete description of the t-tests that were run. Did we run a one-sample or a two-sample t-test? (see http://en.wikipedia.org/wiki/Student's_t-test). What does the value 0 in all rows of the table mean and how should they be interpreted? Why these p-values prevent us from discarding the null hypothesis? Our logic seems to be that because we did not discard the null hypothesis, we must conclude that the means are similar. Is that a correct reasoning?}
 
 The t-tests in \refTable{tab:ttest} demonstrates that the null hypothesis cannot be discarded, as the value $0$ in each line of the \emph{t-test} column confirms, which means that the three means are similar. The \emph{p-values} show the confidence in the hypothesis, in this case that the means are different. As the values are not high, the confidence is very low.
 
