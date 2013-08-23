@@ -1,5 +1,5 @@
 
-
+\REM{
 Capturing behavior variations across inputs is important in the design
 of an \FDO\ compiler. A number of speculative code transformations are
 known to benefit from \FDO, including speculative partial redundancy
@@ -13,6 +13,7 @@ estimation of a statistical distribution is not only unnecessary, but
 it may also mislead FDO decisions if the wrong distribution is assumed
 or there is insufficient data to accurately estimate the
 parameters.
+}
 
 A major challenge in the use of traditional single-training-run \FDO\
 is the selection of a profiling data input that is representative of
@@ -23,17 +24,16 @@ difficult task.  Picking a solitary training run to represent such a
 space is far more challenging, or potentially impossible, if use-cases
 are mutually-exclusive.  While benchmark programs can be modified to
 combine such use-cases into a single run,
-this approach is obviously inapplicable to real programs.  Moreover,
+this approach is obviously inapplicable for real programs.  Moreover,
 user workloads are prone to change over time.  Ensuring stable
 performance across all inputs in today's workload prevents performance
 degradation due to changes in the relative importance of workload
 components.
 
-The {\em Combined Profiling} (\CP) statistical modeling technique
-presented in ~\cite{BerubePhD} produces a {\it Combined Profile} (\CProf)
+Berube developed the {\em Combined Profiling} (\CP) statistical modelling technique that produces a {\it Combined Profile} (\CProf)
 from a collection of traditional single-run profiles, thus
 facilitating the collection and representation of profile information
-over multiple runs. The use of many profiling runs, in turn, eases the
+over multiple runs~\cite{BerubePhD} . The use of many profiling runs, in turn, eases the
 burden of training-workload selection and mitigates the potential for
 performance degradation.  There is no need to select a single input
 for training because data from any number of training runs can be
@@ -53,13 +53,8 @@ Combining profiles is a three-step process \cite{BerubeISPASS12}:
 \item Apply \CP\ to the normalized profiles to create the combined profile.
 \end{enumerate}
 
-\CP\ and \HN\ have been presented in previous 
-work~\cite{BerubeICPE11,BerubeISPASS12}. 
-However, a clearer and expanded version, based on previous versions, can
-be found in ~\cite{BerubePhD}, particularly the
-description of \CP's histograms and the discussion of queries.
-
-\CP\ ~\cite{BerubePhD} provides a data representation for profile information, but does
+\CP\ and \HN\ have been described before~\cite{BerubeICPE11,BerubeISPASS12}. Berube's Ph.D. thesis presents a comprehensive description~\cite{BerubePhD}.
+\CP\ provides a data representation for profile information, but does
 not specify the semantics of the information stored in the combined
 profile.  Raw profiles cannot be combined naively. 
 
@@ -74,6 +69,7 @@ be normalized relative to a common fixed reference.  {\em Hierarchical
 \CP\ that achieves this goal by decomposing a \CFG\ into a hierarchy
 of dominating regions.
 
+\REM{
 \HN\ is presented for edge profiling.  Vertex profiles are treated
 identically, but use the domination relationships between vertexes
 instead of edges.  Domination is usually defined in terms of vertexes.
@@ -82,6 +78,7 @@ algorithm with edge profiles, use the line graph of the \CFG\ instead of
 the \CFG\ itself.  The line graph contains one vertex for each edge in
 the \CFG, and edges in the line graph correspond to adjacencies
 between the edges of the \CFG.
+}
 
 \subsection{Denormalization}
 \label{cp:denorm}

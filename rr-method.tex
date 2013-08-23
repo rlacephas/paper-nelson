@@ -33,9 +33,34 @@
 %\renewcommand{\ifColorText}[2]{{#2}}                % Colors OFF
 
 % Comments on or off: Pick ONE
-\renewcommand{\ifComments}[1]{{#1}}                 % Comments ON
+%\renewcommand{\ifComments}[1]{{#1}}                 % Comments ON
 %\renewcommand{\ifComments}[1]{\REM{#1}}             % Comments OFF
 
+\newif\ifComments
+\Commentstrue
+
+\ifComments
+\newcommand{\chek}[1]{\noindent\textcolor{red}{Check: {#1}}}
+\newcommand{\jna}[1]{\noindent\textcolor{blue}{Nelson: {#1}}}
+\newcommand{\rlar}[1]{\noindent\textcolor{green}{Ricardo: {#1}}}
+\newcommand{\paul}[1]{\noindent\textcolor{magenta}{Berube: {#1}}}
+\newcommand{\bruno}[1]{\noindent\textcolor{magenta}{Bruno: {#1}}}
+\newcommand{\rem}[1]{\noindent\textcolor{red}{\st{#1}}}
+\newcommand{\new}[1]{\noindent\textcolor{blue}{ {#1}}}
+\newcommand{\ed}[1]{\noindent\textcolor{red}{ {#1}}}
+\newcommand{\short}[1]{\noindent\textcolor{blue}{ {#1}}}
+\else
+\newcommand{\chek}[1]{}
+\newcommand{\jna}[1]{}
+\newcommand{\rlar}[1]{}
+\newcommand{\paul}[1]{}
+\newcommand{\bruno}[1]{}
+\newcommand{\rem}[1]{}
+\newcommand{\new}[1]{#1}
+\newcommand{\new}[1]{\noindent\textcolor{blue}{ {#1}}}
+\newcommand{\ed}[1]{#1}
+\newcommand{\short}[1]{}
+\fi
 
 \newcommand{\abbrev}[2][Blue]{\ifColorText{#1}{\ensuremath{\mathrm{#2}}}}
 
@@ -102,21 +127,25 @@ Email: amaral@cs.ualberta.ca}}
 	\label{sec:inlining}
 	\input{text/inlining}
 
-\section{Description of the experiments}
+\section{The Perils of a Poor Experimental Methodology}
 	\label{sec:description}
 	\input{text/description}
-
-\section{Reporting a speedup measured using \FDI\ }
-	\label{sec:speedup}
-	\input{text/speedup}
-
-\section{Statistical considerations on speedups and slowdowns}
-	\label{sec:robust}
-	\input{text/robust}
 
 \section{Combined Profiling Methodology}
 	\label{sec:cmbprof}
 	\input{text/cmbprof}
+	
+\section{Determining the Number of Runs Required for Statistical Significance}
+	\label{sec:robust}
+	\input{text/robust}
+	
+\section{Reporting a speedup measured using \FDI\ }
+	\label{sec:speedup}
+	\input{text/speedup}
+
+
+
+
 
 \section{Related Work}
 	\label{sec:related}

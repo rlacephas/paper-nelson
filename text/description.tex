@@ -3,7 +3,20 @@ Benchmark-based evaluation is often used to predict the effect of a set of code 
 
 The goal of this section is to investigate the potential error in the prediction for the case of \FDI\ using combined profiling. The following experiment compares an \FDI\ with the standard inliner from \llvm: (1) Select a reasonable set of data inputs for a given benchmark; (2) Execute all combinations of single-input profiling/single-input testing for the \FDO\ inliners, repeating each test run a number of times that is sufficient to capture runtime variances;\footnote{For the experiments described in this paper an empirical statistical study using 1000 runs revealed that three runs were sufficient.}  (3) Run the \llvm\ inliner on all inputs --- the same number of times as in (2) for each input; (4) To illustrate the best performance of \FDI\ that could be reported from the data, select the best run amongst all profiling/testing combinations for a given test input and compare with the worst run for the \llvm\ inliner; (5) To demonstrate the worst performance of \FDI, do the opposite, look for the worst \FDI\ run and the best \llvm\ run for a given test input; (6) To find what the actual comparison is, use all but the test input to generate a combined profile and use this combined profile in \FDI; (7) execute this binary the necessary number of times and compare the average of these runs with the average of the same number of runs using the \llvm\ inliner.
 
-%======== Framework, describe
+\begin{figure*}
+\begin{center}
+  \subfigure[\FDI\ is faster than \llvm;]{
+    \includegraphics[width=0.4\linewidth]{Figures/speedupgccall}
+     \label{fig:BestFDIWorstLLVMgcc}
+  }
+ \subfigure[\FDI\ is slower than \llvm;]{
+    \includegraphics[width=0.4\linewidth]{Figures/slowdowngccall}
+     \label{fig:BestFDIWorstLLVMgcc}
+  }
+  \end{center}
+ \caption{Performance Study for \gcc. (a) Best runs of \FDI\ compared with worst runs of \llvm.  (b) Worst runs of \FDI\ compared with best runs of \llvm. Bar heights represent running time normalized to running time of Never}
+  \label{fig:BestWorstComparison}
+\end{figure*}
 
 This performance evaluation uses an infrastructure based on the \llvm\ development framework. This infrastructure includes a set of C++ programs and a set of scripts to control the machine-learning training, the compilation and the execution of performance runs. This single infrastructure offers the option of performing both single-run-training/single-run-testing \FDO\ and  \CP-based \FDO\ with multiple-run performance evaluation. The number of runs used for \CP\ and for the evaluation are parameters set by the experimenter~\cite{BerubePhD}.
 
@@ -14,7 +27,9 @@ The experiments were conducted on $20$ Dell Optiplex 755 running Slackware Linux
 \subsection {Experimental Results}
 
 The first case study uses the SPEC CPU 2006  \gcc\ evaluated with fifteen inputs. The eleven inputs distributed with SPEC CPU 2006 are augmented with  four SPEC 2000 benchmark programs used as input: \bzip, \lbm, \mcf, and \parser. To be used as inputs these programs had to be converted to the single pre-processed file format required by the \gcc\ benchmark.
-Figure~\ref{fig:BestWorstComparison}  presents the result of the comparison between \llvm and \FDI. The objective of this figure is to illustrate how an experimental evaluation that performs a single execution can result in misleading results and conclusions. For each test input XX executions of the program were performed of \FDI\ and \llvm. The training input for \FDI\ was .... The baseline for comparison is  {\tt Never} which is a version of the compiler that never inline. The {\tt Never} version was run YY times. Each bar in Figure~\ref{fig:BestWorstComparison} is the result of comparing the time obtained in a single execution. These results indicate the range of performance that could be reported by a careless experimental evaluation that uses a single execution of each version to report performance variations. The conclusion could vary from saying that \FDI\ is 2.4\% faster than \llvm\ to saying that \llvm\ is 2.8\% faster than \FDI. What is the true relative performance between the two versions?
+Figure~\ref{fig:BestWorstComparison}  presents the result of the comparison between \llvm and \FDI. The objective of this figure is to illustrate how an experimental evaluation that performs a single execution can result in misleading results and conclusions. For each test input the \FDI\ measurement uses a leave-one-in methodology where all inputs, except the one used for testing, are used for training. is and \llvm. The baseline for comparison is  {\tt Never} which is a version of the compiler that uses an inlining cost function that limits inlining to callers containing a single basic block and that are expected to increase the code size in the caller by at most three instructions~\cite{BerubePhD12}.
+
+For all runs on individual inputs for a given version of the compiler, the reported execution time is the minimum of the execution time of three runs. This measuring method is selected to minimize interference from machine activity, such as network transactions or operating system interrupts, that are unrelated with the inlining strategy under study.  Each bar in Figure~\ref{fig:BestWorstComparison} is the result of comparing the time obtained in a single execution. These results indicate the range of performance that could be reported by a careless experimental evaluation that uses a single execution of each version to report performance variations. The conclusion could vary from saying that \FDI\ is 2.4\% faster than \llvm\ to saying that \llvm\ is 2.8\% faster than \FDI. What is the true relative performance between the two versions? The next section provides a description of the Combined Profiling methodology that will be used to determine the actual performance comparison between \FDI\ and \llvm.
  
 
 \begin{figure*}
@@ -45,58 +60,13 @@ Figure~\ref{fig:BestWorstComparison}  presents the result of the comparison betw
   \label{fig:slowdowngcc}
 \end{figure}
 }
-\subsection {Case Study 2: \bzip\  and \gzip}
 
-For the case studies with \bzip\ and \gzip, the code used is not the one distributed by SPEC, but rather fully-functional versions of these programs. Using these versions eliminates the unrealistically-simplified profiling situation where mutually-exclusive use cases are combined into a single program run. Consequently, these programs cannot do decompression and compression, or multiple levels of compression, within the same run.  These distinct use-cases must be covered by different inputs in the program workload.
-
-The inputs for compression include images, ebooks in a variety of formats, movies in MP4 format, textual representation of proteins, audio books, and object files~\cite{BerubePhD}.
 
 \REM{
-The compression set contains the following inputs, with the compression level shown in parentheses:
-\begin{itemize}
-
-\item {\tt avernum (-3)}: The installer for the demo version of the game  ``Avernum: Escape from the Pit'' from Spiderweb Software.
-
-\item {\tt cards (-4)}: A collection of greeting card layouts in the TIFF (uncompressed) image format.
-
-\item {\tt ebooks (-5)}: A collection of ebooks, with and without images, and in a variety of formats, from Project Gutenberg\footnote{http://www.gutenberg.org}.
-
-\item {\tt potemkin-mp4 (-6)}: The 1925 movie ``Bronenosets Potyomkin (Battleship Potemkin)'' in MP4 format, from the Internet Archive\footnote{http://archive.org/details/BattleshipPotemkin}.
-
-\item {\tt proteins-1 (-7)}: A sample of 33 proteins from the RCSB Protein Data Bank database.  6 files for each protein, each stored in a different text-based format, provide different characteristics of the protein's structure\footnote{http://www.rcsb.org}.
-
-\item {\tt revelation-ogg (-8)}: The audio book ``The Revelation of Saint John'' in OGG format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/22945}.
-
-\item {\tt usrlib-so (-9)}: A collection of shared object (.so) files from {\tt /usr/lib/} of a 32-bit gentoo-linux machine.
-
-\end{itemize}
-
-
-The decompression set for each compressor uses the same base set of files, pre-compressed by the appropriate compressor at the default compression level.  The decompression set is composed of:
-\begin{itemize}
-\item {\tt auriel}: The ``Auriel's Retreat'' land-mass addition mod by lance4791 for the game ``The Elder Scrolls IV: Oblivion'' from Bethesda Softworks\footnote{http://planetelderscrolls.gamespy.com/View.php?view=\\ \hspace*{150 pt}OblivionMods.Detail\&id=5949}.
-
-\item {\tt gcc-453}: The source-code archive of the \gcc\ compiler, version 4.5.3\footnote{http://gcc.gnu.org/gcc-4.5}.
-
-\item {\tt lib-a}: A collection of library files (.a) from {\tt /lib/} of a gentoo-linux machine.  As per the gentoo development guide, a library will be installed in {\tt /lib} (boot critical) or {\tt /usr/lib} (general applications), but not both\footnote{http://devmanual.gentoo.org/general-concepts/filesystem/index.html}.
-
-\item {\tt mohicans-ogv}: The 1920 movie ``Last of the Mohicans'' in OGV (ogg video) format, from the Internet Archive\footnote{http://archive.org/details/last\_of\_the\_mohicans\_1920}.
-
-\item {\tt ocal-019}: The Open Clip Art Library archive, version 0.19. The images are primarily in vector-graphics formats\footnote{http://openclipart.org/collections}.
-
-\item {\tt paintings-jpg}: A collection of watercolor paintings, in JPG format.
-
-\item {\tt proteins-2}: A completely different sample of 157 proteins from the RCSB Protein Data Bank database, each in 6 different file formats.
-
-\item {\tt sherlock-mp3}: The audio book ``The Adventures of Sherlock Holmes'' in MP3 format, from Project Gutenberg\footnote{http://www.gutenberg.org/ebooks/28733}.
-
-\end{itemize}
-}
-
 \subsection {Case Study 3: \gobmk}
 
 For the case study with the SPEC CPU 2006 \gobmk, SPEC provides 20 inputs.  However, only 5 of these inputs come from the {\tt ref} workload; the {\tt train} workload contains 8 inputs, and the {\tt test} workload contains 7 inputs.  Many of the inputs from {\tt test} and {\tt train} have very short execution times: 4 inputs take less than 1 second, 6 take 2--9 seconds, 4 take 12--19 seconds, and 1 takes longer than 1 minute.  Execution times of less than a few seconds are subject to large proportional timing imprecision, because the Linux {\tt time} command reports times with a resolution of 1/100$^{th}$ of a second.  Therefore, the 15 longest-running inputs are chosen for \Wfull.  This set is composed of the {\tt ref} and {\tt train} SPEC workloads, plus \iname{connect} and \iname{dniwog} from {\tt test}.
-
+}
 %======== The inlining parameters
 
 \REM{
