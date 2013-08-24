@@ -53,10 +53,14 @@ The t-tests in \refTable{tab:ttest} demonstrates that the null hypothesis cannot
   \label{tab:ttest}
 \end{table}
 
-Another experiment has also shown that the variance when running the same data just three times in a row is not quite different from the one running $100$ times. This experiment was constructed by exercising each `input-run' $3$ times, $3$-consecutive runs for each input, and the whole experiment was run $100$ times% -- which means that the experiment ran $300$ times each input.
-A `full-run' in this experiment is a $3$-consecutive run for each input, hence the experiment ran $100$ `full-runs'. Nevertheless the behavior of the system was stressed through the addition of extra noise, simulating an `uncontrolled variable' \cite{Kalibera2013}. The extra noise was injected by the end of the experiment.
+\jna{A main issue that I have with the description of all the experiments in the paper is that these descriptions are not specific enough. They don't tell me which benchmark program was used, which inputs, etc. For example in the paragraph below: (1)
+What "running the same data" means? Is it executing the same version of the benchmark with the same input? (2) What "is not quite different"? Can we give a numerical value that is the basis for this statement? (3) What is an 'input-run' and why are we using single quotes when we mention it? (4) What "the whole experiment" means? (5) What is a 'full-run'? (6) What 'by the end of the experiment' mean? Is it the case that the noise was added to the measured values after the experiment was completed?}
 
-The purpose of the extra noise was to verify if the system was robust, even though the effect of the noise can mask the correct values, these data can treated assuring robustness. This way the \CP\ methodology was empirically verified with respect to soundness. As can be seen in \refFigure{fig:CProbust}, the deviation from the mean is not large, and also that there is a subtle knob, which increases the running time of the all programs. It was caused by the execution of another system at the same time competing for the same resources. The running time of each program at each 3-consecutive run can be found in the $y$-axis of \refFigure{CP:ebooks}, and the order number of each full-run is depicted on the $x$-axis. The extra noise can also be visualized in the histogram of \refFigure{CP:hist}, where the $x$-axis depicts the running time for the program and the $y$-axis depicts the number of runs at each bin. These two figures show the $3$-consecutive run for the input data {\tt ebooks}.
+Another experiment has also shown that the variance when running the same data just three times in a row is not quite different from the one running $100$ times. This experiment was constructed by exercising each `input-run' $3$ times, $3$-consecutive runs for each input, and the whole experiment was run $100$ times% -- which means that the experiment ran $300$ times each input.
+A `full-run' in this experiment is a $3$-consecutive run for each input, hence the experiment ran $100$ `full-runs'. Nevertheless the behaviour of the system was stressed through the addition of extra noise, simulating an `uncontrolled variable' \cite{Kalibera2013}. The extra noise was injected by the end of the experiment.
+
+\jna{What is this "subtle knob"? This "knob" has to be precisely described. This "another system" must be precisely specified? What exactly was running at the same time?}
+The purpose of the extra noise was to verify if the system was robust, even though the effect of the noise can mask the correct values, these data can be treated assuring robustness. This way the \CP\ methodology was empirically verified with respect to soundness. As can be seen in \refFigure{fig:CProbust}, the deviation from the mean is not large, and also that there is a subtle knob, which increases the running time of the all programs. It was caused by the execution of another system at the same time competing for the same resources. The running time of each program at each 3-consecutive run can be found in the $y$-axis of \refFigure{CP:ebooks}, and the order number of each full-run is depicted on the $x$-axis. The extra noise can also be visualized in the histogram of \refFigure{CP:hist}, where the $x$-axis depicts the running time for the program and the $y$-axis depicts the number of runs at each bin. These two figures show the $3$-consecutive run for the input data {\tt ebooks}.
 
 \begin{figure}
   \centering
@@ -96,7 +100,8 @@ The data collected in the experiment are shown in \refTable{tab:simStats}, and t
   \label{tab:simStats}
 \end{table}
 
-To confirm that the means are statistically representing the same distribution the t-tests were also run. This is summarized in \refTable{tab:statTest} below. It is easy to see that the number of outliers is little, except for the knob region. 
+\jna{How can we "see" that the number of outliers is small? How can we identify "the knob region" in the table?}
+To confirm that the means are statistically representing the same distribution the t-tests were also run. This is summarized in \refTable{tab:statTest} below. It is easy to see that the number of outliers is small, except for the knob region. 
 %because the runtime was being raised during certain amount of time pushing a gradient to increase the time values, and after it, what happened was the other way around, decreasing the time values. Both tables \refTable{tab:simStats} and \refTable{tab:statTest} are shown for the runs.
 
 \begin{table}
@@ -122,7 +127,11 @@ The complete and correct values are described below. This section end with a fig
 
 \subsubsection{Analysis of\ \ \bzip\  and  \gzip}
 
-After analyzing the inlining environment and having the confidence that the results are trustful, the first program studied was \bzip. Collecting data from the same setup (hardware and software) in $18$ different settings was the first step. \refFigure{fig:fdllrep} shows the data collected. The vertical axis shows the normalized execution geometric mean time for each setting, the baseline is Never (no inlining), and the horizontal axis shows the settings organized by number. The red ``*" represent the normalized geomean time of the \FDI\ inlined program, and the blue ``o" represent the normalized geomean for \llvm\ inlined program.
+\jna{What are these 18 "settings"? What changes from one setting to the next?}
+After analyzing the inlining environment and having the confidence that the results are trustful, the first program studied was \bzip. 
+Collecting data from the same setup (hardware and software) in $18$ different settings was the first step. \refFigure{fig:fdllrep} shows the data collected. The vertical axis shows the normalized execution geometric mean time for each setting, the baseline is Never (no inlining), and the horizontal axis shows the settings organized by number. The red ``*" represent the normalized geomean time of the \FDI\ inlined program, and the blue ``o" represent the normalized geomean for \llvm\ inlined program.
+
+\jna{The axis in Figure~\ref{fig:fdllrep} need to be named. Otherwise no one can read the figure.}
 
 \begin{figure}
   \centering
