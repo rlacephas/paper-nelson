@@ -1,11 +1,8 @@
 
 \REM{
 \FDI\ is an \FDO\ inliner that can be parameterized, and it also employs the \CP\ methodology. To show that \FDI\ can active better results than well established static inliners, some experiments were designed. \FDI\ inliner is fully described in ~\cite{BerubePhD}. These experiments followed a single-run methodology, for the training phase and for the testing phase. The input set was defined as a minimal coverage set, and the training set was defined as the whole input set except for the input under test. The experiment compares the runtime performance of the programs when inlined by \llvm\ static inliner with the the performance of the same program when inlined by \FDI\ inliner. 
-}
 
-To make a fair comparison on the inliners and have a reasonable and short input set, some experimental decisions were taken. Both inliners were also evaluated with respect to the baseline Never, which means never inline. The input set for each program was defined to be representative for the entire set of inputs, and are described as follows. The input set for the programs \bzip, \gzip, \gobmk, and \gcc\ is a small subset of the original 15-input set described in \refSection{sec:description}. The results show a slight improvement over \llvm.
 
-\REM{
 The \bzip\ and \gzip\ programs were executed using a representative set of inputs, where compression tasks and decompression tasks were tested under similar inputs.
 The compression set contains the following inputs, with the compression level shown in parentheses:
 \begin{itemize}
@@ -70,23 +67,28 @@ The experiments were run on $20$ Dell Optiplex 755, whose characteristics are:
 
 %============ Our results
 
-In the figures throughout this section, all results are presented in a bar graph where the values used for each of the columns are calculated using the actual running times divided by the actual running time of Never, normalizing the results presented. Whenever the values are less than one, then these particular programs have a better (faster) performance than the same program without inlining. Also, the speedup columns in the tables shown in this section are calculated from the ratio between \FDI\ and \llvm.%, hence, whenever the values are less than one then there is a speedup, otherwise a slowdown.
+This section presents an evaluation of the \FDI\  and the \llvm\ static inliner by comparing their performance against the baseline \Never. 
+The height of each bar in all graphs in this section represents a normalized running time that is the quotient between the running time of the inliner evaluated and the running time of \Never. Each execution time used in this calculation is the minimum of three executions of the same executable program with the same input.
+Therefore a normalized running time below one indicates better (faster) performance than \Never.
+The speedups in the tables in this section are calculated as the ratio between the execution times of \FDI\ and \llvm.%, hence, whenever the values are less than one then there is a speedup, otherwise a slowdown.
 
 \subsection{Presenting the speedup results}
 \label{sec:speedupresult}
 
-As aforementioned the data points were selected as representing a single-run methodology for the experiments, and three benchmarks were used to test the hypotheses, \bzip, \gzip, and \gcc. The points selected were the best-run times for \FDI\ and the worst-run times for \llvm. The results are presented in the following way, \bzip\ and \gzip, are grouped, while \gcc\ is separately described in other section, because the program behavior is completely different from the other two benchmarks.
+The data points were selected as representing a single-run methodology for the experiments, and three benchmarks were used to test the hypotheses, \bzip, \gzip, and \gcc. The points selected were the best-run times for \FDI\ and the worst-run times for \llvm. The results are presented in the following way, \bzip\ and \gzip, are grouped, while \gcc\ is separately described in other section, because the program behavior is completely different from the other two benchmarks.
 
 \subsubsection{Case Study 1 \gcc}
 
-For the \gcc\ benchmark the results show a speedup of $2.52 \%$ over \llvm\, and a $3.17 \%$ speedup over Never, whereas \llvm\ achieved a $0.67 \%$ speedup over Never, for the whole input set. This result is summarized in \refTable{tab:speedupgcc} below. The results are normalized by the baseline Never (no inlining).
+The results in \refTable{tab:speedupgcc} show that \FDI\ outperformed \llvm\ for all inputs for \gcc. The results are normalized by the baseline Never (no inlining) and the geometric mean of the 
+\FDI\  speedup over \llvm\ was $2.52 \%$  for \gcc\ with this set of inputs.
+
 
 \begin{table}
   \centering
   \begin{tiny}
   \input{Tables/speedup}
   \end{tiny}
-  \caption{Summary of the data collected during the experiment with \gcc}
+  \caption{Execution times normalized by the execution time of \Never\ and \FDI\ speedup over \llvm\ for \gcc.}
   \label{tab:speedupgcc}
 \end{table}
 
