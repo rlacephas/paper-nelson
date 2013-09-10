@@ -11,7 +11,7 @@ The goal of this section is to investigate the potential error in the prediction
   }
  \subfigure[\FDI\ is slower than \llvm;]{
     \includegraphics[width=0.4\linewidth]{Figures/slowdowngccall}
-     \label{fig:BestFDIWorstLLVMgcc}
+     \label{fig:WorstFDIBestLLVMgcc}
   }
   \end{center}
  \caption{Performance Study for \gcc. (a) Best runs of \FDI\ compared with worst runs of \llvm.  (b) Worst runs of \FDI\ compared with best runs of \llvm. Bar heights represent running time normalized to running time of Never}
@@ -27,11 +27,11 @@ The experiments were conducted on $20$ Dell Optiplex 755 running Slackware Linux
 \subsection {Experimental Results}
 
 The first case study uses the SPEC CPU 2006  \gcc\ evaluated with fifteen inputs. The eleven inputs distributed with SPEC CPU 2006 are augmented with  four SPEC 2000 benchmark programs used as input: \bzip, \lbm, \mcf, and \parser. To be used as inputs these programs had to be converted to the single pre-processed file format required by the \gcc\ benchmark.
-Figure~\ref{fig:BestWorstComparison}  presents the result of the comparison between \llvm and \FDI. The objective of this figure is to illustrate how an experimental evaluation that performs a single execution can result in misleading results and conclusions. For each test input the \FDI\ measurement uses a leave-one-in methodology where all inputs, except the one used for testing, are used for training. is and \llvm. The baseline for comparison is  {\tt Never} which is a version of the compiler that uses an inlining cost function that limits inlining to callers containing a single basic block and that are expected to increase the code size in the caller by at most three instructions~\cite{BerubePhD12}.
+Figure~\ref{fig:BestWorstComparison}  presents the result of the comparison between \llvm and \FDI. The objective of this figure is to illustrate how an experimental evaluation that performs a single execution can result in misleading results and conclusions. For each test input the \FDI\ measurement uses a leave-one-in methodology where all inputs, except the one used for testing, are used for training. is and \llvm. The baseline for comparison is  {\tt Never} which is a version of the compiler that uses an inlining cost function that limits inlining to callers containing a single basic block and that are expected to increase the code size in the caller by at most three instructions~\cite{BerubePhD}.
 
 For all runs on individual inputs for a given version of the compiler, the reported execution time is the minimum of the execution time of three runs. This measuring method is selected to minimize interference from machine activity, such as network transactions or operating system interrupts, that are unrelated with the inlining strategy under study.  Each bar in Figure~\ref{fig:BestWorstComparison} is the result of comparing the time obtained in a single execution. These results indicate the range of performance that could be reported by a careless experimental evaluation that uses a single execution of each version to report performance variations. The conclusion could vary from saying that \FDI\ is 2.4\% faster than \llvm\ to saying that \llvm\ is 2.8\% faster than \FDI. What is the true relative performance between the two versions? The next section provides a description of the Combined Profiling methodology that will be used to determine the actual performance comparison between \FDI\ and \llvm.
  
-
+\REM{
 \begin{figure*}
 \begin{center}
   \subfigure[\FDI\ is faster than \llvm;]{
@@ -46,7 +46,7 @@ For all runs on individual inputs for a given version of the compiler, the repor
  \caption{Performance Study for \gcc. (a) Best runs of \FDI\ compared with worst runs of \llvm.  (b) Worst runs of \FDI\ compared with best runs of \llvm. Bar heights represent running time normalized to running time of Never}
   \label{fig:BestWorstComparison}
 \end{figure*}
-
+}
 \REM{
 \begin{center}$
 \begin{array}{SS}
