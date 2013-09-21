@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  15 SEP 2013 06:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.7.16)  20 SEP 2013 22:17
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **rr-method.tex
@@ -388,66 +388,66 @@ File: Figures/nt1000.pdf Graphic file (type pdf)
 <use Figures/nt1000.pdf>
 Package pdftex.def Info: Figures/nt1000.pdf used on input line 20.
 (pdftex.def)             Requested size: 252.0pt x 178.5869pt.
- (./Tables/robustTest.tex) [6 <./Figures/nt1000.pdf>]
-(./Tables/tTest.tex) <Figures/ebooks300.pdf, id=540, 1026.83624pt x 758.835pt>
+ [6 <./Figures/nt1000.pdf>] (./Tables/robustTest.tex)
+(./Tables/tTest.tex) [7]
+<Figures/ebooks300.pdf, id=544, 1026.83624pt x 758.835pt>
 File: Figures/ebooks300.pdf Graphic file (type pdf)
 
 <use Figures/ebooks300.pdf>
-Package pdftex.def Info: Figures/ebooks300.pdf used on input line 77.
+Package pdftex.def Info: Figures/ebooks300.pdf used on input line 86.
 (pdftex.def)             Requested size: 162.36996pt x 120.0pt.
 
-<Figures/ebooks.pdf, id=541, 476.78125pt x 375.4025pt>
+<Figures/ebooks.pdf, id=545, 476.78125pt x 375.4025pt>
 File: Figures/ebooks.pdf Graphic file (type pdf)
 
 <use Figures/ebooks.pdf>
-Package pdftex.def Info: Figures/ebooks.pdf used on input line 87.
+Package pdftex.def Info: Figures/ebooks.pdf used on input line 96.
 (pdftex.def)             Requested size: 152.40578pt x 120.0pt.
  (./Tables/simStats.tex) (./Tables/statTest.tex)
-[7] <Figures/fdllrep.pdf, id=546, 490.83376pt x 375.4025pt>
+[8 <./Figures/ebooks300.pdf> <./Figures/ebooks.pdf>]
+<Figures/fdllrep.pdf, id=555, 490.83376pt x 375.4025pt>
 File: Figures/fdllrep.pdf Graphic file (type pdf)
 
 <use Figures/fdllrep.pdf>
-Package pdftex.def Info: Figures/fdllrep.pdf used on input line 134.
+Package pdftex.def Info: Figures/fdllrep.pdf used on input line 149.
 (pdftex.def)             Requested size: 252.0pt x 192.73584pt.
- [8 <./Figures/ebooks300.pdf> <./Figures/ebooks.pdf> <./Figures/fdllrep.pdf>] (
-./Tables/fullexp.tex)
-<Figures/gzipfdll.pdf, id=563, 485.815pt x 375.4025pt>
+ (./Tables/fullexp.tex) [9 <./Figures/fdllrep.pdf>]
+<Figures/gzipfdll.pdf, id=566, 485.815pt x 375.4025pt>
 File: Figures/gzipfdll.pdf Graphic file (type pdf)
 
 <use Figures/gzipfdll.pdf>
-Package pdftex.def Info: Figures/gzipfdll.pdf used on input line 160.
+Package pdftex.def Info: Figures/gzipfdll.pdf used on input line 180.
 (pdftex.def)             Requested size: 252.0pt x 194.72353pt.
  (./Tables/fullspeedupgbk.tex)
-<Figures/speedupgbkall.pdf, id=564, 437.635pt x 262.9825pt>
+<Figures/speedupgbkall.pdf, id=567, 437.635pt x 262.9825pt>
 File: Figures/speedupgbkall.pdf Graphic file (type pdf)
 
 <use Figures/speedupgbkall.pdf>
-Package pdftex.def Info: Figures/speedupgbkall.pdf used on input line 184.
+Package pdftex.def Info: Figures/speedupgbkall.pdf used on input line 205.
 (pdftex.def)             Requested size: 252.0pt x 151.43044pt.
- [9 <./Figures/gzipfdll.pdf>]
-(./Tables/fullspeedup.tex)
+ (./Tables/fullspeedup.tex)
 File: Figures/speedupgccall.pdf Graphic file (type pdf)
- <use Figures/speedupgccall.pdf>
-Package pdftex.def Info: Figures/speedupgccall.pdf used on input line 208.
-(pdftex.def)             Requested size: 252.0pt x 151.53723pt.
 
-<Figures/gcc-results.pdf, id=571, 433.62pt x 325.215pt>
+<use Figures/speedupgccall.pdf>
+Package pdftex.def Info: Figures/speedupgccall.pdf used on input line 229.
+(pdftex.def)             Requested size: 252.0pt x 151.53723pt.
+ [10 <./Figures/gzipfdll.pdf> <./Figures/speedupgbkall.pdf>] <Figures/gcc-resul
+ts.pdf, id=824, 433.62pt x 325.215pt>
 File: Figures/gcc-results.pdf Graphic file (type pdf)
 
 <use Figures/gcc-results.pdf>
-Package pdftex.def Info: Figures/gcc-results.pdf used on input line 235.
+Package pdftex.def Info: Figures/gcc-results.pdf used on input line 256.
 (pdftex.def)             Requested size: 252.0pt x 189.00197pt.
-) (./text/speedup.tex [10 <./Figures/speedupgbkall.pdf>] (./Tables/speedup.tex)
- (./Tables/speedupb.tex)
-<Figures/speedupbzipall.pdf, id=829, 434.62375pt x 261.97874pt>
+) (./text/speedup.tex (./Tables/speedup.tex)
+(./Tables/speedupb.tex) [11 <./Figures/gcc-results.pdf>]
+<Figures/speedupbzipall.pdf, id=839, 434.62375pt x 261.97874pt>
 File: Figures/speedupbzipall.pdf Graphic file (type pdf)
 
 <use Figures/speedupbzipall.pdf>
 Package pdftex.def Info: Figures/speedupbzipall.pdf used on input line 133.
 (pdftex.def)             Requested size: 252.0pt x 151.8998pt.
- [11 <./Figures/gcc-results.pdf> <./Figures/speedupbzipall.pdf>] (./Tables/spee
-dupz.tex)
-<Figures/speedupgzipall.pdf, id=1091, 413.545pt x 248.93pt>
+ (./Tables/speedupz.tex)
+<Figures/speedupgzipall.pdf, id=840, 413.545pt x 248.93pt>
 File: Figures/speedupgzipall.pdf Graphic file (type pdf)
 
 <use Figures/speedupgzipall.pdf>
@@ -459,13 +459,10 @@ File: Figures/speedupgbkall.pdf Graphic file (type pdf)
 <use Figures/speedupgbkall.pdf>
 Package pdftex.def Info: Figures/speedupgbkall.pdf used on input line 177.
 (pdftex.def)             Requested size: 252.0pt x 151.43044pt.
- (./Tables/slowdown.tex) (./Tables/slowdownb.tex) (./Tables/slowdownz.tex) (./T
-ables/slowdowngbk.tex)) (./text/related.tex
-Underfull \vbox (badness 2269) has occurred while \output is active []
-
- [12 <./Figures/speedupgzipall.pdf>] [13]) (./text/conclusion.tex) (./rr-method
-.bbl
-[14])
+ [12 <./Figures/speedupbzipall.pdf> <./Figures/speedupgzipall.pdf>] (./Tables/s
+lowdown.tex) (./Tables/slowdownb.tex)
+(./Tables/slowdownz.tex) (./Tables/slowdowngbk.tex)) (./text/related.tex
+[13]) (./text/conclusion.tex [14]) (./rr-method.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -490,7 +487,7 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Here is how much of TeX's memory you used:
  4697 strings out of 493315
  67422 string characters out of 6137904
- 179038 words of memory out of 5000000
+ 174040 words of memory out of 5000000
  7986 multiletter control sequences out of 15000+600000
  49671 words of font info for 102 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -511,8 +508,7 @@ st/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts
 /type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw
 /times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-
-Output written on rr-method.pdf (15 pages, 724293 bytes).
+Output written on rr-method.pdf (15 pages, 726249 bytes).
 PDF statistics:
  1408 PDF objects out of 1440 (max. 8388607)
  842 compressed objects within 9 object streams
